@@ -1,0 +1,14 @@
+{
+  "name": "@asterai-io/sdk",
+  "version": "0.0.0",
+  "description": "SDK for AsterAI",
+  "main": "index.ts",
+  "author": "Lorenzo Fontoura <lorenzo@asterai.io>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "asbuild": "asc index.ts --target sdk"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.27.27"
+  }
+}
