@@ -7,7 +7,7 @@ Monorepo for AsterAI client libraries, interfaces and tooling.
 | N/A     | @asterai-io/sdk | Provide AsterAI Plugin interfaces |
 
 # Documentation
-AsterAI is a plugin-based cloud infrastructure provider for AI products.
+AsterAI is a plugin-based cloud infrastructure provider for AI applications.
 Using AsterAI's open-source tooling, developers can write simple
 software packages (Plugins) and compose them into a powerful AI application. 
 
