@@ -22,8 +22,8 @@ a JSON-RPC-like interface.
 This allows for WebAssembly Plugins to communicate with each other at runtime,
 independently of what language they were written in.
 
-Additionally, open source plugins can also be used as libraries and called from
-other plugins.
+Additionally, open source plugins can also be used as libraries and imported
+via code from other plugins.
 Note that this approach is a "static" way of using plugins as libraries, and is
 not language agnostic (an AssemblyScript library cannot be imported from a
 plugin written in Rust, for example).
