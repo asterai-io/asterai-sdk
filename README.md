@@ -50,3 +50,9 @@ reliable and fast.
 The LLM + Similarity mode, the App will do the similarity check and also
 query an LLM if the plugin should be executed in the current context.
 This is a good option for plugins that trigger important or slow actions.
+
+## Plugin secrets and environment variables
+An AsterAI App can configure secrets and environment variables
+to be passed via the hook input.
+Plugins are responsible for not leaking the secrets to untrusted
+plugins or to the end user.
