@@ -56,3 +56,8 @@ An AsterAI App can configure secrets and environment variables
 to be passed via the hook input.
 Plugins are responsible for not leaking the secrets to untrusted
 plugins or to the end user.
+
+## Host interfaces
+Host interfaces provide methods to contact external APIs and servers
+through the application host environment.
+AsterAI provides host interfaces for HTTP, WebSocket, LLM, and Vector DB.
