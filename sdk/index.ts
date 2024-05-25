@@ -1,6 +1,11 @@
-export interface Message {
-  content: string;
-  timestampUnix: number;
+export class Message {
+  public content: string;
+  public timestampUnix: number;
+
+  public constructor(content, timestampUnix) {
+    this.content = content;
+    this.timestampUnix = timestampUnix;
+  }
 }
 
 export class PluginOutput {
