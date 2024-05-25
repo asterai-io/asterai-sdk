@@ -2,7 +2,7 @@ export class Message {
   public content: string;
   public timestampUnix: number;
 
-  public constructor(content, timestampUnix) {
+  public constructor(content: string, timestampUnix: number) {
     this.content = content;
     this.timestampUnix = timestampUnix;
   }
@@ -38,4 +38,13 @@ export class PluginOutput {
     this.assistantMessage = message;
     return this;
   }
+}
+
+// TODO: remove this so it's broken and ensure asterai API handles it gracefully.
+export function allocate(size: usize): usize {
+  return heap.alloc(size);
+}
+
+export function deallocate(ptr: usize): void {
+  heap.free(ptr);
 }
