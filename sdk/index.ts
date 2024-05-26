@@ -39,3 +39,12 @@ export class PluginOutput {
     return this;
   }
 }
+
+// TODO: remove this so it's broken and ensure asterai API handles it gracefully.
+export function allocate(size: usize): usize {
+  return heap.alloc(size);
+}
+
+export function deallocate(ptr: usize): void {
+  heap.free(ptr);
+}
