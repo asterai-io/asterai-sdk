@@ -1,3 +1,5 @@
+import {TypedMap} from "./collections";
+
 export * from "./interface_exports";
 
 export class Message {
@@ -12,21 +14,18 @@ export class Message {
 
 export class PluginOutput {
   private name: string;
-  private data: Map<string, string> | null;
+  private data: TypedMap<string, string>;
   private systemMessage: string | null;
   private assistantMessage: string | null;
 
   public constructor(name: string) {
     this.name = name;
-    this.data = null;
+    this.data = new TypedMap();
     this.systemMessage = null;
     this.assistantMessage = null;
   }
 
   public withData(key: string, value: string): PluginOutput {
-    if (!this.data) {
-      this.data = new Map();
-    }
     this.data.set(key, value);
     return this;
   }
