@@ -19,3 +19,16 @@ export function handleFunctionCall(arguments: TypedMap<string, string>): string 
   const hexString = parsed.toString(16);
   return `0x${hexString}`;
 }
+
+class FunctionArguments {
+  constructor(
+    public prefix: string,
+    // The number.
+    public number: f32,
+  ) {}
+}
+
+export function handleFunctionCallTest(arguments: FunctionArguments): string {
+  const hexString = arguments.number.toString(16);
+  return `${arguments.prefix}${hexString}`;
+}

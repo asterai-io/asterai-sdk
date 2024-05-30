@@ -1,6 +1,6 @@
 // This module exports functions necessary for the host to communicate
 // with the WASM module via AssemblyScript-specific interfaces.
-import {Message, PluginOutput} from "./index";
+import {PluginInput, PluginOutput} from "./index";
 import {ArrayBuffer} from "arraybuffer";
 import {TypedMap, TypedMapEntry} from "./collections";
 
@@ -27,7 +27,7 @@ export function asc_id_of_type(typeId: TypeId): usize {
     case TypeId.String:
       return idof<string>();
     case TypeId.Message:
-      return idof<Message>();
+      return idof<PluginInput>();
     case TypeId.ArrayBuffer:
       return idof<ArrayBuffer>();
     case TypeId.TypedMapStringString:
