@@ -2,7 +2,7 @@ import {TypedMap} from "./collections";
 
 export * from "./interface_exports";
 
-export class Message {
+export class PluginInput {
   public content: string;
   public timestampUnix: i64;
 
