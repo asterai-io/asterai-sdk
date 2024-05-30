@@ -1,0 +1,9 @@
+name: to-hex
+functions:
+  - name: convertDecimalToHex
+    description: >-
+      converts a decimal number to a hexadecimal string starting with 0x
+    arguments:
+      - name: decimal
+        type: string
+        description: the physical delivery address
