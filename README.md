@@ -1,10 +1,10 @@
 # asterai-sdk
 Monorepo for AsterAI client libraries, interfaces and tooling.
 
-| Version | Package name    | Purpose                           |
-|---------|-----------------|-----------------------------------|
-| N/A     | @asterai-io/cli | Deploy AsterAI Plugins            |
-| N/A     | @asterai-io/sdk | Provide AsterAI Plugin interfaces |
+| Package name         | Purpose                           |
+|----------------------|-----------------------------------|
+| [@asterai-io/cli][1] | Deploy AsterAI Plugins            |
+| [@asterai-io/sdk][2] | Provide AsterAI Plugin interfaces |
 
 # Documentation
 AsterAI is a plugin-based cloud infrastructure provider for AI applications.
@@ -61,3 +61,6 @@ plugins or to the end user.
 Host interfaces provide methods to contact external APIs and servers
 through the application host environment.
 AsterAI provides host interfaces for HTTP, WebSocket, LLM, and Vector DB.
+
+[1]: ./cli
+[2]: ./sdk
