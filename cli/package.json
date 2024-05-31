@@ -12,13 +12,16 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
     "prepack": "oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif readme && git add README.md"
+    "version": "oclif readme && git add README.md",
+    "format": "prettier --write .",
+    "format-staged": "pretty-quick --staged"
   },
   "bin": {
     "asterai": "./bin/run.js"
@@ -40,7 +43,7 @@
       "@oclif/plugin-help"
     ],
     "topicSeparator": " ",
-    "topics": { }
+    "topics": {}
   },
   "types": "dist/index.d.ts",
   "dependencies": {
@@ -59,8 +62,10 @@
     "eslint-config-oclif": "^5",
     "eslint-config-oclif-typescript": "^3",
     "eslint-config-prettier": "^9",
+    "husky": "^9.0.11",
     "mocha": "^10",
     "oclif": "^4",
+    "prettier": "^3.2.5",
     "shx": "^0.3.3",
     "ts-node": "^10",
     "typescript": "^5"

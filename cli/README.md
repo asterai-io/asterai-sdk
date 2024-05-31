@@ -1,20 +1,21 @@
-@asterai/cli
-=================
+# @asterai/cli
 
 CLI for building and deploying AsterAI plugins
-
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/@asterai/cli.svg)](https://npmjs.org/package/@asterai/cli)
 [![Downloads/week](https://img.shields.io/npm/dw/@asterai/cli.svg)](https://npmjs.org/package/@asterai/cli)
 
-
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+
+- [Usage](#usage)
+- [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
+
 ```sh-session
 $ npm install -g @asterai/cli
 $ asterai COMMAND
@@ -26,22 +27,26 @@ USAGE
   $ asterai COMMAND
 ...
 ```
+
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
-* [`asterai hello PERSON`](#asterai-hello-person)
-* [`asterai hello world`](#asterai-hello-world)
-* [`asterai help [COMMAND]`](#asterai-help-command)
-* [`asterai plugins`](#asterai-plugins)
-* [`asterai plugins add PLUGIN`](#asterai-plugins-add-plugin)
-* [`asterai plugins:inspect PLUGIN...`](#asterai-pluginsinspect-plugin)
-* [`asterai plugins install PLUGIN`](#asterai-plugins-install-plugin)
-* [`asterai plugins link PATH`](#asterai-plugins-link-path)
-* [`asterai plugins remove [PLUGIN]`](#asterai-plugins-remove-plugin)
-* [`asterai plugins reset`](#asterai-plugins-reset)
-* [`asterai plugins uninstall [PLUGIN]`](#asterai-plugins-uninstall-plugin)
-* [`asterai plugins unlink [PLUGIN]`](#asterai-plugins-unlink-plugin)
-* [`asterai plugins update`](#asterai-plugins-update)
+
+- [`asterai hello PERSON`](#asterai-hello-person)
+- [`asterai hello world`](#asterai-hello-world)
+- [`asterai help [COMMAND]`](#asterai-help-command)
+- [`asterai plugins`](#asterai-plugins)
+- [`asterai plugins add PLUGIN`](#asterai-plugins-add-plugin)
+- [`asterai plugins:inspect PLUGIN...`](#asterai-pluginsinspect-plugin)
+- [`asterai plugins install PLUGIN`](#asterai-plugins-install-plugin)
+- [`asterai plugins link PATH`](#asterai-plugins-link-path)
+- [`asterai plugins remove [PLUGIN]`](#asterai-plugins-remove-plugin)
+- [`asterai plugins reset`](#asterai-plugins-reset)
+- [`asterai plugins uninstall [PLUGIN]`](#asterai-plugins-uninstall-plugin)
+- [`asterai plugins unlink [PLUGIN]`](#asterai-plugins-unlink-plugin)
+- [`asterai plugins update`](#asterai-plugins-update)
 
 ## `asterai hello PERSON`
 
@@ -393,4 +398,5 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.1.3/src/commands/plugins/update.ts)_
+
 <!-- commandsstop -->
