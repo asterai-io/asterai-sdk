@@ -36,7 +36,9 @@
     "bin": "asterai",
     "dirname": "asterai",
     "commands": "./dist/commands",
-    "plugins": [],
+    "plugins": [
+      "@oclif/plugin-help"
+    ],
     "topicSeparator": " ",
     "topics": { }
   },
