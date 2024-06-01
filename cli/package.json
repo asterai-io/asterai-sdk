@@ -12,7 +12,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "cd .. && husky cli/.husky",
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
     "postpack": "shx rm -f oclif.manifest.json",
@@ -66,6 +66,7 @@
     "mocha": "^10",
     "oclif": "^4",
     "prettier": "^3.2.5",
+    "pretty-quick": "^4.0.0",
     "shx": "^0.3.3",
     "ts-node": "^10",
     "typescript": "^5"
