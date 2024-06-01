@@ -8,7 +8,7 @@ export default class Codegen extends Command {
     }),
   };
 
-  static description = 'Say hello!';
+  static description = "Say hello!";
 
   static examples = [
     `<%= config.bin %> <%= command.id %> friend --from oclif
