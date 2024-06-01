@@ -2,33 +2,18 @@ import { Args, Command, Flags } from "@oclif/core";
 
 export default class Codegen extends Command {
   static args = {
-    person: Args.string({
-      description: "Person to say hello to",
-      required: true,
+    manifest: Args.string({
+      default: "plugin.asterai.yaml",
     }),
   };
+  static description = "Generate code from the plugin manifest";
 
-  static description = "Say hello!";
+  static examples = [`<%= config.bin %> <%= command.id %>`];
 
-  static examples = [
-    `<%= config.bin %> <%= command.id %> friend --from oclif
-hello friend from oclif! (./src/commands/hello/index.ts)
-`,
-  ];
-
-  static flags = {
-    from: Flags.string({
-      char: "f",
-      description: "Who is saying hello",
-      required: true,
-    }),
-  };
+  static flags = {};
 
   async run(): Promise<void> {
-    const { args, flags } = await this.parse(Hello);
-
-    this.log(
-      `hello ${args.person} from ${flags.from}! (./src/commands/hello/index.ts)`,
-    );
+    const { args, flags } = await this.parse(Codegen);
+    this.log("running codegen");
   }
 }

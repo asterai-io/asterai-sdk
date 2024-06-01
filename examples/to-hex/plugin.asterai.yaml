@@ -2,8 +2,8 @@ name: to-hex
 functions:
   - name: convertDecimalToHex
     description: >-
-      converts a decimal number to a hexadecimal string starting with 0x
+      converts a decimal integer to a hexadecimal string starting with 0x
     arguments:
-      - name: decimal
-        type: string
+      - name: integer
+        type: u64
         description: the physical delivery address
