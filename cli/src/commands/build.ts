@@ -33,6 +33,9 @@ export default class Build extends Command {
     const { args, flags } = await this.parse(Build);
     const manifestPath = path.resolve(flags.manifest);
     const inputFile = path.resolve(args.input);
+    if (!fs.existsSync(inputFile)) {
+      throw new Error(`input file not found (${args.input})`);
+    }
     const inputFileName = path.parse(inputFile).name;
     const baseDir = path.dirname(manifestPath);
     const outDir = path.join(baseDir, "build");
