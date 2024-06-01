@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 import { compile, CompileOptions } from "../compile.js";
 
-export default class Deploy extends Command {
+export default class Build extends Command {
   static args = {
     input: Args.string({
       default: "plugin.ts",
@@ -30,7 +30,7 @@ export default class Deploy extends Command {
   };
 
   async run(): Promise<void> {
-    const { args, flags } = await this.parse(Deploy);
+    const { args, flags } = await this.parse(Build);
     const manifestPath = path.resolve(flags.manifest);
     const inputFile = path.resolve(args.input);
     const inputFileName = path.parse(inputFile).name;
