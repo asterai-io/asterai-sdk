@@ -2,7 +2,6 @@
   "name": "to-hex",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "node tests",
     "asbuild:debug": "asc index.ts --target debug",
@@ -13,7 +12,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@asterai-io/sdk": "link:../../sdk",
+    "@asterai-io/sdk": "link:../../sdk"
+  },
+  "peerDependencies": {
     "assemblyscript": "0.27.27"
   },
   "type": "module",

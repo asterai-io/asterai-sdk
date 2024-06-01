@@ -1,6 +1,4 @@
-import {TypedMap} from "./collections";
-
-export * from "./interface_exports";
+import { TypedMap } from "./collections";
 
 export class PluginInput {
   public content: string;

@@ -1,8 +1,8 @@
 // This module exports functions necessary for the host to communicate
 // with the WASM module via AssemblyScript-specific interfaces.
-import {PluginInput, PluginOutput} from "./index";
-import {ArrayBuffer} from "arraybuffer";
-import {TypedMap, TypedMapEntry} from "./collections";
+import { PluginInput, PluginOutput } from "./index";
+import { ArrayBuffer } from "arraybuffer";
+import { TypedMap, TypedMapEntry } from "./collections";
 
 // TODO: remove this so it's broken and ensure asterai API handles it gracefully.
 export function allocate(size: usize): usize {
