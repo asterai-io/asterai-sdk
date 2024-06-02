@@ -1,4 +1,4 @@
-import { Args, Command, Flags } from "@oclif/core";
+import { Args, Command } from "@oclif/core";
 import path from "path";
 import fs from "fs";
 import { compile, CompileOptions } from "../compile.js";
@@ -10,24 +10,11 @@ export default class Build extends Command {
     }),
   };
 
-  static description = "compiles and uploads the plugin to asterai";
+  static description = "compiles the plugin";
 
-  static examples = [
-    `<%= config.bin %> <%= command.id %> --app 66a46b12-b1a7-4b72-a64a-0e4fe21902b6`,
-  ];
+  static examples = [`<%= config.bin %> <%= command.id %>`];
 
-  static flags = {
-    app: Flags.string({
-      char: "a",
-      description: "app ID to immediately configure this plugin with",
-      required: false,
-    }),
-    manifest: Flags.string({
-      char: "m",
-      description: "manifest path",
-      default: "plugin.asterai.yaml",
-    }),
-  };
+  static flags = {};
 
   async run(): Promise<void> {
     const { args, flags } = await this.parse(Build);
