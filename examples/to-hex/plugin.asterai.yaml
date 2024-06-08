@@ -6,4 +6,4 @@ functions:
     arguments:
       - name: integer
         type: u64
-        description: the physical delivery address
+        description: the integer to be converted to hex
