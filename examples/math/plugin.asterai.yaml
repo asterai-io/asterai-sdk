@@ -1,0 +1,42 @@
+name: math
+functions:
+  - name: add
+    description: >-
+      adds two 64-bit floating point numbers
+    arguments:
+      - name: a
+        type: f64
+        description: first addition variable
+      - name: b
+        type: f64
+        description: second addition variable
+  - name: mul
+    description: >-
+      multiplies two 64-bit floating point numbers
+    arguments:
+      - name: a
+        type: f64
+        description: first multiplication variable
+      - name: b
+        type: f64
+        description: second multiplication variable
+  - name: div
+    description: >-
+      divides two 64-bit floating point numbers
+    arguments:
+      - name: numerator
+        type: f64
+        description: the division numerator variable
+      - name: denominator
+        type: f64
+        description: the division denominator variable
+  - name: pow
+    description: >-
+      raises a base to a power with 64-bit floating point numbers
+    arguments:
+      - name: base
+        type: f64
+        description: the base number
+      - name: power
+        type: f64
+        description: the power to raise the base number to

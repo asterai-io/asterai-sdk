@@ -38,3 +38,7 @@ export class PluginOutput {
     return this;
   }
 }
+
+// Host interface for logging.
+// TODO use log namespace.
+export declare function log_debug(msg: string): void;
