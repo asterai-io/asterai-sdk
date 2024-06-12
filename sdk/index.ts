@@ -42,3 +42,7 @@ export class PluginOutput {
 // Host interface for logging.
 // TODO use log namespace.
 export declare function log_debug(msg: string): void;
+
+export declare namespace host {
+  export function http_request(request: string): string;
+}
