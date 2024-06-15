@@ -1,3 +1,4 @@
+import { parseInt, parseFloat } from "string";
 
 /**
  * TypedMap entry.
@@ -69,4 +70,29 @@ export class TypedMap<K, V> {
     }
     return false;
   }
+}
+
+export function parseTypeFromString<T>(value: string, typeName: string): T {
+  const isInt =
+    typeName == "i8" ||
+    typeName == "u8" ||
+    typeName == "i16" ||
+    typeName == "u16" ||
+    typeName == "i32" ||
+    typeName == "u32" ||
+    typeName == "i64" ||
+    typeName == "u64" ||
+    typeName == "isize" ||
+    typeName == "usize";
+  if (isInt) {
+    return parseInt(value) as T;
+  }
+  const isFloat = typeName == "f32" || typeName == "f64";
+  if (isFloat) {
+    return parseFloat(value) as T;
+  }
+  if (typeName == "bool") {
+    return (value.toLowerCase() == "true") as T;
+  }
+  throw new Error("invalid type name");
 }

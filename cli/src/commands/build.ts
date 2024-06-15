@@ -1,4 +1,4 @@
-import { Args, Command } from "@oclif/core";
+import { Args, Command, Flags } from "@oclif/core";
 import path from "path";
 import fs from "fs";
 import { compile, CompileOptions } from "../compile.js";
@@ -14,7 +14,13 @@ export default class Build extends Command {
 
   static examples = [`<%= config.bin %> <%= command.id %>`];
 
-  static flags = {};
+  static flags = {
+    manifest: Flags.string({
+      char: "m",
+      description: "manifest path",
+      default: "plugin.asterai.yaml",
+    }),
+  };
 
   async run(): Promise<void> {
     const { args, flags } = await this.parse(Build);
