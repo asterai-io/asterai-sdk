@@ -1,0 +1,9 @@
+name: plugin
+functions:
+  - name: orderBurger
+    description: >-
+      orders a burger to be delivered to the specified address
+    arguments:
+      - name: address
+        type: string
+        description: the address to deliver the burger to
