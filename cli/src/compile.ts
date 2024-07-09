@@ -14,7 +14,7 @@ const COMPILER_OPTIONS: asc.APIOptions = {
 
 export const compile = async (options: CompileOptions) => {
   // TODO also include a file here to remove the necessity of including
-  // export * from "@asterai-io/sdk";
+  // export * from "@asterai/sdk";
   // in each plugin.
   const args = [
     "--exportRuntime",

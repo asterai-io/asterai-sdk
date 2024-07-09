@@ -1,6 +1,6 @@
-import { HttpRequestBuilder } from "@asterai-io/sdk/http";
+import { HttpRequestBuilder } from "@asterai/sdk/http";
 import { SearchCryptoTokenArgs } from "./generated/SearchCryptoTokenArgs";
-export * from "@asterai-io/sdk/exports";
+export * from "@asterai/sdk/exports";
 
 export function searchCryptoToken(args: SearchCryptoTokenArgs): string {
   return new HttpRequestBuilder("api.dexscreener.com")

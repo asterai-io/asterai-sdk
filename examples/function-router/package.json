@@ -11,7 +11,7 @@
   "author": "Lorenzo Fontoura <lorenzo@asterai.io>",
   "license": "UNLICENSED",
   "devDependencies": {
-    "@asterai-io/sdk": "link:../../sdk",
+    "@asterai/sdk": "link:../../sdk",
     "assemblyscript": "0.27.27"
   },
   "type": "module",

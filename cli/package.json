@@ -1,14 +1,16 @@
 {
   "name": "@asterai/cli",
   "description": "CLI for building and deploying AsterAI plugins",
-  "version": "0.0.0",
-  "author": "AsterAI",
+  "version": "0.1.0",
+  "author": "asterai <support@asterai.io>",
   "repository": "asterai-io/asterai-sdk",
   "homepage": "https://github.com/asterai-io/asterai-sdk",
   "keywords": [
+    "asterai",
+    "cli",
     "oclif"
   ],
-  "license": "MIT",
+  "license": "UNLICENSED",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {

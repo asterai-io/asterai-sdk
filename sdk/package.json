@@ -1,9 +1,15 @@
 {
-  "name": "@asterai-io/sdk",
-  "version": "0.0.0",
+  "name": "@asterai/sdk",
+  "version": "0.1.0",
   "description": "SDK for AsterAI",
   "main": "index.ts",
-  "author": "Lorenzo Fontoura <lorenzo@asterai.io>",
+  "author": "asterai <support@asterai.io>",
+  "repository": "asterai-io/asterai-sdk",
+  "homepage": "https://github.com/asterai-io/asterai-sdk",
+  "keywords": [
+    "asterai",
+    "sdk"
+  ],
   "license": "UNLICENSED",
   "scripts": {
     "asbuild": "asc index.ts --target sdk"

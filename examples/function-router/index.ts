@@ -1,5 +1,5 @@
-export * from "@asterai-io/sdk";
-import {PluginInput, PluginOutput} from "@asterai-io/sdk";
+export * from "@asterai/sdk";
+import { PluginInput, PluginOutput } from "@asterai/sdk";
 
 export function processMessage(input: PluginInput): PluginOutput | null {
   return new PluginOutput("hello world plugin")

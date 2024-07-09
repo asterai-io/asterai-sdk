@@ -2,7 +2,7 @@ import { AddArgs } from "./generated/AddArgs";
 import { MulArgs } from "./generated/MulArgs";
 import { DivArgs } from "./generated/DivArgs";
 import { PowArgs } from "./generated/PowArgs";
-export * from "@asterai-io/sdk/exports";
+export * from "@asterai/sdk/exports";
 
 export function add(args: AddArgs): string {
   return `${args.a + args.b}`;

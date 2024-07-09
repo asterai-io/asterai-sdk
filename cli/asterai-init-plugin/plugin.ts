@@ -1,5 +1,5 @@
 import { OrderBurgerArgs } from "./generated/OrderBurgerArgs";
-export * from "@asterai-io/sdk/exports";
+export * from "@asterai/sdk/exports";
 
 export function orderBurger(args: OrderBurgerArgs): string {
   // TODO: make http call to burger API.

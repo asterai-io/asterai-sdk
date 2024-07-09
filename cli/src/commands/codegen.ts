@@ -93,7 +93,7 @@ const writeFunctionFile = (
   stream: WriteStream,
 ) => {
   stream.write(`\
-import {parseTypeFromString, TypedMap} from "@asterai-io/sdk/collections";
+import {parseTypeFromString, TypedMap} from "@asterai/sdk/collections";
 
 export class ${className} extends TypedMap<string, string> {
   ${args.map(renderArgGetterString).join("")}
