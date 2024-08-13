@@ -60,11 +60,11 @@ export default class Deploy extends Command {
     await compile(options);
     const form = new FormData();
     form.append("app_id", flags.app);
-    form.append("module", fs.createReadStream(outputFile));
-    form.append("manifest", fs.createReadStream(manifestPath));
+    form.append("module", fs.readFileSync(outputFile));
+    form.append("manifest", fs.readFileSync(manifestPath));
     await axios({
       url: flags.endpoint,
-      method: "post",
+      method: "put",
       data: form,
       headers: {
         Authorization: getConfigValue("key"),
