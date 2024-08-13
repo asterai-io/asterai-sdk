@@ -64,12 +64,19 @@ export default class Deploy extends Command {
     form.append("manifest", fs.createReadStream(manifestPath));
     await axios({
       url: flags.endpoint,
-      method: "put",
+      method: "post",
       data: form,
       headers: {
         Authorization: getConfigValue("key"),
+        ...form.getHeaders(),
       },
-    });
-    console.log("done");
+    })
+      .then(() => console.log("done"))
+      .catch(logRequestError);
   }
 }
+
+const logRequestError = (e: any) => {
+  const info = e.response?.data ?? e;
+  console.log("request error:", info);
+};
