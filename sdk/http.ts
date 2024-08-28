@@ -37,12 +37,12 @@ export class HttpRequestBuilder {
   private _version: string = "HTTP/1.1";
 
   public constructor(host: string) {
-    this._headers.set("Host", host);
-    this._headers.set("Connection", "close");
+    this._headers.set("host", host);
+    this._headers.set("connection", "close");
   }
 
   public header(key: string, value: string): HttpRequestBuilder {
-    this._headers.set(key, value);
+    this._headers.set(key.toLowerCase(), value);
     return this;
   }
 
@@ -73,6 +73,7 @@ export class HttpRequestBuilder {
 
   public build(): HttpRequest {
     const queryString = this.renderQueryString();
+    this.setDefaultContentLengthHeader();
     const headers = this.renderHeaders();
     const method = this._method;
     const path = this._path;
@@ -80,6 +81,13 @@ export class HttpRequestBuilder {
     const body = this._body;
     const content = `${method} ${path}${queryString} ${version}\r\n${headers}\r\n${body}`;
     return new HttpRequest(content);
+  }
+
+  private setDefaultContentLengthHeader(): void {
+    if (this._headers.has("content-length")) {
+      return;
+    }
+    this._headers.set("content-length", this._body.length.toString());
   }
 
   public send(): HttpResponse {
