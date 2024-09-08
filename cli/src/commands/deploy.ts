@@ -6,6 +6,9 @@ import FormData from "form-data";
 import axios from "axios";
 import { getConfigValue } from "../config.js";
 
+const PRODUCTION_ENDPOINT = "https://api.asterai.io/app/plugin";
+const STAGING_ENDPOINT = "https://staging.api.asterai.io/app/plugin";
+
 export default class Deploy extends Command {
   static args = {
     input: Args.string({
@@ -32,7 +35,10 @@ export default class Deploy extends Command {
     }),
     endpoint: Flags.string({
       char: "e",
-      default: "https://api.asterai.io/app/plugin",
+      default: PRODUCTION_ENDPOINT,
+    }),
+    staging: Flags.boolean({
+      char: "s",
     }),
   };
 
@@ -62,8 +68,9 @@ export default class Deploy extends Command {
     form.append("app_id", flags.app);
     form.append("module", fs.readFileSync(outputFile));
     form.append("manifest", fs.readFileSync(manifestPath));
+    const url = flags.staging ? STAGING_ENDPOINT : flags.endpoint;
     await axios({
-      url: flags.endpoint,
+      url,
       method: "put",
       data: form,
       headers: {
