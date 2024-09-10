@@ -42,7 +42,7 @@ type ManifestFunctionSchema = z.infer<typeof ManifestFunctionSchema>;
 
 const ManifestSchema = z.object({
   name: z.string(),
-  functions: z.array(ManifestFunctionSchema),
+  functions: z.array(ManifestFunctionSchema).optional(),
 });
 
 type ManifestSchema = z.infer<typeof ManifestSchema>;
@@ -74,6 +74,9 @@ export default class Codegen extends Command {
     const manifest = ManifestSchema.parse(
       YAML.parse(fs.readFileSync(manifestPath, "utf8")),
     );
+    if (!manifest.functions) {
+      return;
+    }
     if (!fs.existsSync(outDir)) {
       fs.mkdirSync(outDir, { recursive: true });
     }
