@@ -1,13 +1,9 @@
 import { TypedMap } from "./collections";
 
 export class PluginInput {
-  public content: string;
-  public timestampUnix: i64;
-
-  public constructor(content: string, timestampUnix: i64) {
-    this.content = content;
-    this.timestampUnix = timestampUnix;
-  }
+  public content!: string;
+  public timestampUnix!: i64;
+  public userId!: string | null;
 }
 
 export class PluginOutput {

@@ -1,0 +1,5 @@
+name: user-identifier
+functions:
+  - name: getUserId
+    description: >-
+      returns the user ID, if authenticated
