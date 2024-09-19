@@ -35,7 +35,7 @@ type ManifestFunctionArgumentSchema = z.infer<
 const ManifestFunctionSchema = z.object({
   name: z.string(),
   description: z.string(),
-  arguments: z.array(ManifestFunctionArgumentSchema),
+  arguments: z.array(ManifestFunctionArgumentSchema).optional(),
 });
 
 type ManifestFunctionSchema = z.infer<typeof ManifestFunctionSchema>;
@@ -85,7 +85,7 @@ export default class Codegen extends Command {
       const fileName = `${className}.ts`;
       const filePath = path.join(outDir, fileName);
       const stream = fs.createWriteStream(filePath);
-      writeFunctionFile(className, func.arguments, stream);
+      writeFunctionFile(className, func.arguments ?? [], stream);
     }
   }
 }
