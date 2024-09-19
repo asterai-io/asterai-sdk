@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+service Math {
+  rpc Add(BinaryOperationArgs) returns (CalculationResponse);
+  rpc Mul(BinaryOperationArgs) returns (CalculationResponse);
+  rpc Sub(BinaryOperationArgs) returns (CalculationResponse);
+  rpc Div(BinaryOperationArgs) returns (CalculationResponse);
+  rpc Pow(BinaryOperationArgs) returns (CalculationResponse);
+}
+
+message BinaryOperationArgs {
+  double a = 1;
+  double b = 2;
+}
+
+message CalculationResponse {
+  double result = 1;
+}

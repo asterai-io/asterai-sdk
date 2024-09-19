@@ -1,21 +1,23 @@
-import { AddArgs } from "./generated/AddArgs";
-import { MulArgs } from "./generated/MulArgs";
-import { DivArgs } from "./generated/DivArgs";
-import { PowArgs } from "./generated/PowArgs";
+import { BinaryOperationArgs } from "./generated/BinaryOperationArgs";
+import { CalculationResponse } from "./generated/CalculationResponse";
 export * from "@asterai/sdk/exports";
 
-export function add(args: AddArgs): string {
-  return `${args.a + args.b}`;
+export function add(args: BinaryOperationArgs): CalculationResponse {
+  const result = args.a + args.b;
+  return new CalculationResponse(result);
 }
 
-export function mul(args: MulArgs): string {
-  return `${args.a * args.b}`;
+export function mul(args: BinaryOperationArgs): CalculationResponse {
+  const result = args.a * args.b;
+  return new CalculationResponse(result);
 }
 
-export function div(args: DivArgs): string {
-  return `${args.numerator / args.denominator}`;
+export function div(args: BinaryOperationArgs): CalculationResponse {
+  const result = args.a / args.b;
+  return new CalculationResponse(result);
 }
 
-export function pow(args: PowArgs): string {
-  return `${args.base ** args.power}`;
+export function pow(args: BinaryOperationArgs): CalculationResponse {
+  const result = args.a ** args.b;
+  return new CalculationResponse(result);
 }

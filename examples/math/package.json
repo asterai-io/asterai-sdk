@@ -23,5 +23,9 @@
       "import": "./build/release.js",
       "types": "./build/release.d.ts"
     }
+  },
+  "dependencies": {
+    "as-proto": "^1.3.0",
+    "as-proto-gen": "^1.3.0"
   }
 }

@@ -1,39 +1,42 @@
 import { TypedMap } from "./collections";
 
-export class PluginInput {
-  public content: string;
-  public timestampUnix: i64;
+export class Context<Args extends TypedMap<string, string>> {
+  private args!: Args;
+  private query!: Query;
+}
 
-  public constructor(content: string, timestampUnix: i64) {
-    this.content = content;
-    this.timestampUnix = timestampUnix;
+export class Query extends TypedMap<string, string> {
+  public get content(): string {
+    return this.mustGet("content");
+  }
+
+  public get userId(): string | null {
+    return this.get("userId");
   }
 }
 
-export class PluginOutput {
-  private name: string;
+export class Output {
   private data: TypedMap<string, string>;
   private systemMessage: string | null;
   private assistantMessage: string | null;
 
-  public constructor(name: string) {
-    this.name = name;
+  public constructor() {
     this.data = new TypedMap();
     this.systemMessage = null;
     this.assistantMessage = null;
   }
 
-  public withData(key: string, value: string): PluginOutput {
+  public withData(key: string, value: string): Output {
     this.data.set(key, value);
     return this;
   }
 
-  public withSystemMessage(message: string): PluginOutput {
+  public withSystemMessage(message: string): Output {
     this.systemMessage = message;
     return this;
   }
 
-  public withAssistantMessage(message: string): PluginOutput {
+  public withAssistantMessage(message: string): Output {
     this.assistantMessage = message;
     return this;
   }
