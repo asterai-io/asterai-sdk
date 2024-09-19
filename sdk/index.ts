@@ -42,4 +42,13 @@ export declare namespace log {
 export declare namespace host {
   export function http_request(request: string): string;
   export function semantic_search(request: TypedMap<string, string>): string;
+  export function kv_get_user_string(
+    userId: string,
+    key: string,
+  ): string | null;
+  export function kv_set_user_string(
+    userId: string,
+    key: string,
+    value: string | null,
+  ): void;
 }
