@@ -2,7 +2,7 @@
   "name": "@asterai/sdk",
   "version": "0.1.5",
   "description": "SDK for AsterAI",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "author": "asterai <support@asterai.io>",
   "repository": "asterai-io/asterai-sdk",
   "homepage": "https://github.com/asterai-io/asterai-sdk",
@@ -12,7 +12,7 @@
   ],
   "license": "UNLICENSED",
   "scripts": {
-    "asbuild": "asc index.ts --target sdk"
+    "asbuild": "asc src/index.ts --target sdk"
   },
   "devDependencies": {
     "assemblyscript": "0.27.27"

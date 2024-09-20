@@ -1,6 +1,6 @@
-import { PluginInput, PluginOutput } from "@asterai/sdk";
+import { PluginInput, PluginOutput } from "sdk";
 import { IdentifyUserArgs } from "./generated/IdentifyUserArgs";
-export * from "@asterai/sdk/exports";
+export * from "sdk/src/exports";
 
 // TODO: improve this. It is an early experiment and not meant for production.
 let inputCache: PluginInput | null = null;
