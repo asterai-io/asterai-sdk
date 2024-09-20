@@ -1,29 +1,18 @@
 import { TypedMap } from "./collections";
 
-export class Context<Args extends TypedMap<string, string>> {
-  private args!: Args;
-  private query!: Query;
-}
-
-export class Query extends TypedMap<string, string> {
-  public get content(): string {
-    return this.mustGet("content");
-  }
-
-  public get userId(): string | null {
-    return this.get("userId");
-  }
+export class PluginInput {
+  public content!: string;
+  public timestampUnix!: i64;
+  public user_id!: string | null;
 }
 
 export class Output {
   private data: TypedMap<string, string>;
   private systemMessage: string | null;
-  private assistantMessage: string | null;
 
   public constructor() {
     this.data = new TypedMap();
     this.systemMessage = null;
-    this.assistantMessage = null;
   }
 
   public withData(key: string, value: string): Output {
@@ -33,11 +22,6 @@ export class Output {
 
   public withSystemMessage(message: string): Output {
     this.systemMessage = message;
-    return this;
-  }
-
-  public withAssistantMessage(message: string): Output {
-    this.assistantMessage = message;
     return this;
   }
 }
@@ -50,4 +34,13 @@ export declare namespace log {
 export declare namespace host {
   export function http_request(request: string): string;
   export function semantic_search(request: TypedMap<string, string>): string;
+  export function kv_get_user_string(
+    userId: string,
+    key: string,
+  ): string | null;
+  export function kv_set_user_string(
+    userId: string,
+    key: string,
+    value: string | null,
+  ): void;
 }
