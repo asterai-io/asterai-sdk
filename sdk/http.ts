@@ -125,7 +125,7 @@ export class HttpRequestBuilder {
   }
 }
 
-export function encodeURIComponent(input: string): string {
+export function encodeUriComponent(input: string): string {
   let result: string = ""
 
   for(let i = 0 ; i < input.length; i++){
