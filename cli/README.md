@@ -1,6 +1,6 @@
 # @asterai/cli
 
-CLI for building and deploying AsterAI plugins
+CLI for building and deploying asterai plugins
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/@asterai/cli.svg)](https://npmjs.org/package/@asterai/cli)
