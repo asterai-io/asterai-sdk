@@ -10,11 +10,7 @@ service Math {
 }
 
 message BinaryOperationInput {
-  BinaryOperationArgs args = 1;
-  PluginContext context = 2;
-}
-
-message BinaryOperationArgs {
+  PluginContext context = 1;
   double a = 2;
   double b = 3;
 }
