@@ -1,23 +1,31 @@
-import { BinaryOperationArgs } from "./generated/BinaryOperationArgs";
-import { CalculationResponse } from "./generated/CalculationResponse";
+import { BinaryOperationInput } from "./generated/BinaryOperationInput";
+import { CalculationOutput } from "./generated/CalculationOutput";
+import { Protobuf } from "@asterai/as-proto/assembly";
 export * from "@asterai/sdk/exports";
 
-export function add(args: BinaryOperationArgs): CalculationResponse {
-  const result = args.a + args.b;
-  return new CalculationResponse(result);
+export function add(inputBuffer: Uint8Array): Uint8Array {
+  const input = Protobuf.decode<BinaryOperationInput>(
+    inputBuffer,
+    BinaryOperationInput.decode,
+  );
+  const result = input.args.a + input.args.b;
+  return Protobuf.encode<CalculationOutput>(
+    new CalculationOutput(result),
+    CalculationOutput.encode,
+  );
 }
 
-export function mul(args: BinaryOperationArgs): CalculationResponse {
-  const result = args.a * args.b;
-  return new CalculationResponse(result);
+export function mul(input: BinaryOperationInput): CalculationOutput {
+  const result = input.args.a * input.args.b;
+  return new CalculationOutput(result);
 }
 
-export function div(args: BinaryOperationArgs): CalculationResponse {
-  const result = args.a / args.b;
-  return new CalculationResponse(result);
+export function div(input: BinaryOperationInput): CalculationOutput {
+  const result = input.args.a / input.args.b;
+  return new CalculationOutput(result);
 }
 
-export function pow(args: BinaryOperationArgs): CalculationResponse {
-  const result = args.a ** args.b;
-  return new CalculationResponse(result);
+export function pow(input: BinaryOperationInput): CalculationOutput {
+  const result = input.args.a ** input.args.b;
+  return new CalculationOutput(result);
 }

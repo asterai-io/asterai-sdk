@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+message PluginContext {
+  AppQuery query = 1;
+}
+
+message AppQuery {
+  string content = 1;
+  int64 timestamp_unix_millis = 2;
+  optional string user_id = 3;
+}
+
+message HostSemanticSearchRequest {
+  string query = 1;
+  string app_collection_name = 2;
+}

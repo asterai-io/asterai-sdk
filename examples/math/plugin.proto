@@ -1,18 +1,24 @@
 syntax = "proto3";
+import "node_modules/@asterai/sdk/protobuf/asterai.proto";
 
 service Math {
-  rpc Add(BinaryOperationArgs) returns (CalculationResponse);
-  rpc Mul(BinaryOperationArgs) returns (CalculationResponse);
-  rpc Sub(BinaryOperationArgs) returns (CalculationResponse);
-  rpc Div(BinaryOperationArgs) returns (CalculationResponse);
-  rpc Pow(BinaryOperationArgs) returns (CalculationResponse);
+  rpc Add(BinaryOperationInput) returns (CalculationOutput);
+  rpc Mul(BinaryOperationInput) returns (CalculationOutput);
+  rpc Sub(BinaryOperationInput) returns (CalculationOutput);
+  rpc Div(BinaryOperationInput) returns (CalculationOutput);
+  rpc Pow(BinaryOperationInput) returns (CalculationOutput);
+}
+
+message BinaryOperationInput {
+  BinaryOperationArgs args = 1;
+  PluginContext context = 2;
 }
 
 message BinaryOperationArgs {
-  double a = 1;
-  double b = 2;
+  double a = 2;
+  double b = 3;
 }
 
-message CalculationResponse {
+message CalculationOutput {
   double result = 1;
 }
