@@ -1,7 +1,7 @@
 {
   "name": "@asterai/sdk",
   "version": "0.2.0",
-  "description": "SDK for AsterAI",
+  "description": "SDK for asterai",
   "main": "index.ts",
   "author": "asterai <support@asterai.io>",
   "repository": "asterai-io/asterai-sdk",

@@ -1,28 +1,28 @@
 # asterai-sdk
 
-Monorepo for AsterAI client libraries, interfaces and tooling.
+Monorepo for asterai client libraries, interfaces and tooling.
 
 | Package name         | Purpose                           |
 | -------------------- | --------------------------------- |
-| [@asterai-io/cli][1] | Deploy AsterAI Plugins            |
-| [@asterai-io/sdk][2] | Provide AsterAI Plugin interfaces |
+| [@asterai-io/cli][1] | Deploy asterai Plugins            |
+| [@asterai-io/sdk][2] | Provide asterai Plugin interfaces |
 
 # Documentation
 
 See the main documentation at [docs.asterai.io](https://docs.asterai.io)
 
-AsterAI is a plugin-based cloud infrastructure provider for AI applications.
-Using AsterAI's open-source tooling, developers can write simple
+asterai is a plugin-based cloud infrastructure provider for AI applications.
+Using asterai's open-source tooling, developers can write simple
 software packages (Plugins) and compose them into a powerful AI application.
 
 ## Plugins and libraries
 
-An AsterAI Plugin contains at least one entry point, called a hook, which can
+An asterai Plugin contains at least one entry point, called a hook, which can
 hook into the request lifecycle.
 The main hook, `processRequest`, handles incoming user requests
 and may output response data.
 
-The AsterAI Plugin system allows for runtime calling of other plugins through
+The asterai Plugin system allows for runtime calling of other plugins through
 a JSON-RPC-like interface.
 This allows for WebAssembly Plugins to communicate with each other at runtime,
 independently of what language they were written in.
@@ -59,7 +59,7 @@ This is a good option for plugins that trigger important or slow actions.
 
 ## Plugin secrets and environment variables
 
-An AsterAI App can configure secrets and environment variables
+An asterai App can configure secrets and environment variables
 to be passed via the hook input.
 Plugins are responsible for not leaking the secrets to untrusted
 plugins or to the end user.
@@ -68,7 +68,7 @@ plugins or to the end user.
 
 Host interfaces provide methods to contact external APIs and servers
 through the application host environment.
-AsterAI provides host interfaces for HTTP, WebSocket, LLM, and Vector DB.
+asterai provides host interfaces for HTTP, WebSocket, LLM, and Vector DB.
 
 [1]: ./cli
 [2]: ./sdk
