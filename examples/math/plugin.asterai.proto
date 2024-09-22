@@ -3,11 +3,11 @@ import "node_modules/@asterai/sdk/protobuf/asterai.proto";
 
 service Math {
 //  rpc ProcessQuery(PluginContext) returns (Empty);
-  rpc Add(BinaryOperationInput) returns (CalculationOutput);
-  rpc Mul(BinaryOperationInput) returns (CalculationOutput);
-  rpc Sub(BinaryOperationInput) returns (CalculationOutput);
-  rpc Div(BinaryOperationInput) returns (CalculationOutput);
-  rpc Pow(BinaryOperationInput) returns (CalculationOutput);
+  rpc add(BinaryOperationInput) returns (CalculationOutput);
+  rpc mul(BinaryOperationInput) returns (CalculationOutput);
+  rpc sub(BinaryOperationInput) returns (CalculationOutput);
+  rpc div(BinaryOperationInput) returns (CalculationOutput);
+  rpc pow(BinaryOperationInput) returns (CalculationOutput);
 }
 
 //message ProcessQueryOutput {}
@@ -20,4 +20,5 @@ message BinaryOperationInput {
 
 message CalculationOutput {
   double result = 1;
+  string system_message = 2;
 }
