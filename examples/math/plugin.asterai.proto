@@ -5,7 +5,6 @@ service Math {
 //  rpc ProcessQuery(PluginContext) returns (Empty);
   rpc add(BinaryOperationInput) returns (CalculationOutput);
   rpc mul(BinaryOperationInput) returns (CalculationOutput);
-  rpc sub(BinaryOperationInput) returns (CalculationOutput);
   rpc div(BinaryOperationInput) returns (CalculationOutput);
   rpc pow(BinaryOperationInput) returns (CalculationOutput);
 }
