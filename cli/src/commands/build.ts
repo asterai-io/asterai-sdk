@@ -5,7 +5,6 @@ import { compile, CompileOptions } from "../compile.js";
 import Mustache from "mustache";
 import protobuf, { Service } from "protobufjs";
 import { mergeProtoImports } from "./deploy.js";
-import { temporaryFile } from "tempy";
 
 export type BuildArgs = {
   input: string;
@@ -72,6 +71,7 @@ export const build = async (
   );
   const mergedTempFilePath = writeMergedPluginCodeTempFile(
     mergedPluginCode,
+    path.parse(inputFile).dir,
     inputFileName,
   );
   const globalFile = path.join(libsDir, "@asterai/sdk/global.ts");
@@ -81,7 +81,12 @@ export const build = async (
     outputFile,
     libs: libsDir,
   };
-  await compile(options);
+  try {
+    await compile(options);
+  } catch (e) {
+    fs.unlinkSync(mergedTempFilePath);
+    throw e;
+  }
   return {
     manifestPath,
     outputFile,
@@ -144,7 +149,7 @@ const generateEntryPointCode = (
       }
     `;
     const view = {
-      fnc: functionDescriptor.functionName,
+      func: functionDescriptor.functionName,
       inpt: functionDescriptor.inputType,
       outp: functionDescriptor.outputType,
     };
@@ -165,9 +170,11 @@ const mergeInputPluginCodeWithEntrypoint = (
 
 const writeMergedPluginCodeTempFile = (
   source: string,
+  inputFileDir: string,
   inputFileName: string,
 ): string => {
-  const tempFilePath = temporaryFile({ name: `${inputFileName}.ts` });
+  const tempFileName = `.entrypoint.${inputFileName}.ts`;
+  const tempFilePath = path.join(inputFileDir, tempFileName);
   fs.writeFileSync(tempFilePath, source, { encoding: "utf8" });
   return tempFilePath;
 };

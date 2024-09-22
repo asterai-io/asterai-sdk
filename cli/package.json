@@ -57,8 +57,7 @@
     "axios": "^1.7.2",
     "form-data": "^4.0.0",
     "mustache": "^4.2.0",
-    "protobufjs": "^7.4.0",
-    "tempy": "^3.1.0"
+    "protobufjs": "^7.4.0"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
