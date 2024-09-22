@@ -63,8 +63,12 @@ export const build = async (
   }
   const proto = fs.readFileSync(manifestPath, { encoding: "utf8" });
   const functionDescriptors = getPluginFunctionDescriptors(proto, manifestPath);
-  const entryPointCode = generateEntryPointCode(functionDescriptors);
   const inputFileContent = fs.readFileSync(inputFile, { encoding: "utf8" });
+  assertPluginCodeHasAllFunctionsFromManifest(
+    inputFileContent,
+    functionDescriptors,
+  );
+  const entryPointCode = generateEntryPointCode(functionDescriptors);
   const mergedPluginCode = mergeInputPluginCodeWithEntrypoint(
     inputFileContent,
     entryPointCode,
@@ -177,4 +181,27 @@ const writeMergedPluginCodeTempFile = (
   const tempFilePath = path.join(inputFileDir, tempFileName);
   fs.writeFileSync(tempFilePath, source, { encoding: "utf8" });
   return tempFilePath;
+};
+
+/**
+ * Throw an error if the plugin WASM source is missing a function from
+ * the manifest.
+ * The only purpose of this function is to let the user know about
+ * the issue in a direct way.
+ */
+const assertPluginCodeHasAllFunctionsFromManifest = (
+  source: string,
+  functionDescriptors: PluginFunctionDescriptor[],
+) => {
+  for (const functionDescriptor of functionDescriptors) {
+    const includesFunction = source.includes(
+      `function ${functionDescriptor.functionName}`,
+    );
+    if (!includesFunction) {
+      throw new Error(
+        `function "${functionDescriptor.functionName}" was defined in plugin ` +
+          "manifest (.proto file) but is missing from plugin code",
+      );
+    }
+  }
 };
