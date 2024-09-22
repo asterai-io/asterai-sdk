@@ -137,7 +137,7 @@ const generateEntryPointCode = (
   let code = "\n// generated plugin entry points\n\n";
   for (const functionDescriptor of functionDescriptors) {
     const template: string = `
-      export function {{func}}EntryPoint(ptr: u32): u32 {
+      export function {{func}}_entry_point(ptr: u32): u32 {
         const inputBuffer = readBufferFromPtr(ptr);
         const input = Protobuf.decode<{{inpt}}>(
           inputBuffer,
