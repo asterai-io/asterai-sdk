@@ -58,8 +58,9 @@ export const build = async (
   if (!fs.existsSync(libsDir)) {
     throw new Error("no node_modules found in the plugin directory");
   }
+  const globalFile = path.join(libsDir, "@asterai/sdk/global.ts");
   const options: CompileOptions = {
-    inputFile,
+    inputFiles: [inputFile, globalFile],
     baseDir,
     outputFile,
     libs: libsDir,

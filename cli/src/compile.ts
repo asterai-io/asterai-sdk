@@ -1,7 +1,7 @@
 import * as asc from "assemblyscript/asc";
 
 export type CompileOptions = {
-  inputFile: string;
+  inputFiles: string[];
   baseDir: string;
   libs: string;
   outputFile: string;
@@ -13,14 +13,11 @@ const COMPILER_OPTIONS: asc.APIOptions = {
 };
 
 export const compile = async (options: CompileOptions) => {
-  // TODO also include a file here to remove the necessity of including
-  // export * from "@asterai/sdk";
-  // in each plugin.
   const args = [
     "--exportRuntime",
     "--runtime",
     "stub",
-    options.inputFile,
+    ...options.inputFiles,
     "--baseDir",
     options.baseDir,
     "--lib",

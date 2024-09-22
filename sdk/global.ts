@@ -1,3 +1,4 @@
+// Global module compiled with every plugin.
 // This module exports functions necessary for the host to communicate
 // with the WASM module via AssemblyScript-specific interfaces.
 

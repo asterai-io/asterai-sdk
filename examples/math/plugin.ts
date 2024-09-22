@@ -2,7 +2,6 @@ import { BinaryOperationInput } from "./generated/BinaryOperationInput";
 import { CalculationOutput } from "./generated/CalculationOutput";
 import { Protobuf } from "@asterai/as-proto/assembly";
 import { readBufferFromPtr, writeBufferToPr } from "@asterai/sdk/buffer";
-export * from "@asterai/sdk/exports";
 
 export function add(ptr: u32): u32 {
   const inputBuffer = readBufferFromPtr(ptr);
