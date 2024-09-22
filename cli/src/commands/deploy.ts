@@ -84,13 +84,19 @@ const deploy = async (args: DeployArgs, flags: DeployFlags) => {
     .catch(logRequestError);
 };
 
-const mergeProtoImports = (proto: string, protoPath: string): string => {
+export const mergeProtoImports = (
+  proto: string,
+  protoPath: string,
+  excludeSdk = true,
+  excludeSyntaxDefinition = true,
+  n = 0,
+): string => {
   let mergedManifestString = "";
   const lines = proto.split("\n");
   for (let line of lines) {
     line = line.trim();
     const isSyntaxLine = line.startsWith("syntax");
-    if (isSyntaxLine) {
+    if (isSyntaxLine && (excludeSyntaxDefinition || n > 1)) {
       continue;
     }
     const isImportLine = line.startsWith("import");
@@ -103,14 +109,20 @@ const mergeProtoImports = (proto: string, protoPath: string): string => {
     const pathEnd = importLine.lastIndexOf('"');
     const pathRelative = importLine.substring(pathStart, pathEnd);
     const isSdkImport = pathRelative.startsWith("node_modules/@asterai/sdk");
-    if (isSdkImport) {
+    if (isSdkImport && excludeSdk) {
       // Asterai protobuf definitions should not be uploaded
       // as part of the plugin manifest.
       continue;
     }
     const pathAbsolute = path.join(path.dirname(protoPath), pathRelative);
     const importProto = fs.readFileSync(pathAbsolute, { encoding: "utf8" });
-    const importProtoMerged = mergeProtoImports(importProto, pathAbsolute);
+    const importProtoMerged = mergeProtoImports(
+      importProto,
+      pathAbsolute,
+      excludeSdk,
+      excludeSyntaxDefinition,
+      n + 1,
+    );
     mergedManifestString = `${mergedManifestString}\n${importProtoMerged}`;
   }
   return mergedManifestString.trim();
