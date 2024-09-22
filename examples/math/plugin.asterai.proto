@@ -19,6 +19,5 @@ message BinaryOperationInput {
 }
 
 message CalculationOutput {
-  double result = 1;
-  string system_message = 2;
+  string system_message = 1;
 }
