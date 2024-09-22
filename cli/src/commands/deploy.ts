@@ -68,7 +68,6 @@ const deploy = async (args: DeployArgs, flags: DeployFlags) => {
     manifestString,
     args.manifestPath,
   );
-  console.log("merged:\n\n" + mergedManifestString);
   form.append("manifest", mergedManifestString);
   const url = flags.staging ? STAGING_ENDPOINT : flags.endpoint;
   await axios({
