@@ -1,4 +1,3 @@
-// TODO: confirm if these are required.
 export function readBufferFromPtr(ptr: u32): Uint8Array {
   const lengthBuffer = new Uint32Array(1);
   memory.copy(lengthBuffer.dataStart, ptr, 4);
