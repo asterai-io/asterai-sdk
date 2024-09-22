@@ -87,9 +87,8 @@ export const build = async (
   };
   try {
     await compile(options);
-  } catch (e) {
+  } finally {
     fs.unlinkSync(mergedTempFilePath);
-    throw e;
   }
   return {
     manifestPath,
