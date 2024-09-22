@@ -68,7 +68,7 @@ USAGE
   $ asterai build [INPUT] [-m <value>]
 
 FLAGS
-  -m, --manifest=<value>  [default: plugin.asterai.yaml] manifest path
+  -m, --manifest=<value>  [default: plugin.asterai.proto] manifest path
 
 DESCRIPTION
   compiles the plugin
@@ -88,7 +88,7 @@ USAGE
   $ asterai codegen [-m <value>] [-o <value>]
 
 FLAGS
-  -m, --manifest=<value>   [default: plugin.asterai.yaml] manifest path
+  -m, --manifest=<value>   [default: plugin.asterai.proto] manifest path
   -o, --outputDir=<value>  [default: generated] output directory
 
 DESCRIPTION
@@ -111,7 +111,7 @@ USAGE
 FLAGS
   -a, --app=<value>       (required) app ID to immediately configure this plugin with
   -e, --endpoint=<value>  [default: https://api.asterai.io/app/plugin]
-  -m, --manifest=<value>  [default: plugin.asterai.yaml] manifest path
+  -m, --manifest=<value>  [default: plugin.asterai.proto] manifest path
   -s, --staging
 
 DESCRIPTION

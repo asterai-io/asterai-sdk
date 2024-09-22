@@ -14,3 +14,35 @@ message HostSemanticSearchRequest {
   string query = 1;
   string app_collection_name = 2;
 }
+
+message HostSemanticSearchResponse {
+  string response = 1;
+}
+
+message HostLogRequest {
+  string content = 1;
+  string level = 2;
+}
+
+message HostHttpRequest {
+  string request = 1;
+}
+
+message HostHttpResponse {
+  string response = 1;
+}
+
+message HostKvGetUserStringRequest {
+  string user_id = 1;
+  string key = 2;
+}
+
+message HostKvGetUserStringResponse {
+  optional string value = 1;
+}
+
+message HostKvSetUserStringRequest {
+  string user_id = 1;
+  string key = 2;
+  string value = 3;
+}

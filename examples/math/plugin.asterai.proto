@@ -2,12 +2,15 @@ syntax = "proto3";
 import "node_modules/@asterai/sdk/protobuf/asterai.proto";
 
 service Math {
+//  rpc ProcessQuery(PluginContext) returns (Empty);
   rpc Add(BinaryOperationInput) returns (CalculationOutput);
   rpc Mul(BinaryOperationInput) returns (CalculationOutput);
   rpc Sub(BinaryOperationInput) returns (CalculationOutput);
   rpc Div(BinaryOperationInput) returns (CalculationOutput);
   rpc Pow(BinaryOperationInput) returns (CalculationOutput);
 }
+
+//message ProcessQueryOutput {}
 
 message BinaryOperationInput {
   PluginContext context = 1;

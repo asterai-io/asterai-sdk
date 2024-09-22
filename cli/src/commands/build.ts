@@ -31,7 +31,7 @@ export default class Build extends Command {
     manifest: Flags.string({
       char: "m",
       description: "manifest path",
-      default: "plugin.asterai.yaml",
+      default: "plugin.asterai.proto",
     }),
   };
 
