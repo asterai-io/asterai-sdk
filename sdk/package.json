@@ -1,6 +1,6 @@
 {
   "name": "@asterai/sdk",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "SDK for asterai",
   "main": "index.ts",
   "author": "asterai <support@asterai.io>",
@@ -23,11 +23,14 @@
     "tsconfig.json",
     "README.md"
   ],
+  "dependencies": {
+    "@asterai/as-proto-gen": "^1.4.1"
+  },
   "peerDependencies": {
     "@asterai/as-proto": "1.4.1"
   },
   "devDependencies": {
-    "assemblyscript": "0.27.27",
-    "@asterai/as-proto": "1.4.1"
+    "@asterai/as-proto": "1.4.1",
+    "assemblyscript": "0.27.27"
   }
 }
