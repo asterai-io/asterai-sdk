@@ -1,6 +1,6 @@
 {
   "name": "@asterai/sdk",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "SDK for asterai",
   "main": "index.ts",
   "author": "asterai <support@asterai.io>",
@@ -20,6 +20,7 @@
     "buffer.ts",
     "global.ts",
     "protobuf/",
+    "generated/",
     "asconfig.json",
     "package.json",
     "tsconfig.json",
