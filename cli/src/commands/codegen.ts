@@ -48,6 +48,16 @@ export const codegen = (flags: CodegenFlags) => {
   const cliRootDir = getCliRootDir();
   const absoluteAsProtoGenPath = path.join(cliRootDir, AS_PROTO_GEN_PATH);
   try {
+    execSync("protoc --version");
+  } catch (e) {
+    console.error(
+      "No protoc binary found. " +
+        "Is protocol buffers installed on the system? " +
+        "Download protocol buffers here: https://protobuf.dev/downloads",
+    );
+    return;
+  }
+  try {
     execSync(
       "protoc " +
         `--plugin='protoc-gen-as=${absoluteAsProtoGenPath}' ` +
