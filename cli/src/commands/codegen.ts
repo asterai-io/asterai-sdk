@@ -3,8 +3,8 @@ import path from "path";
 import fs from "fs";
 import { execSync } from "node:child_process";
 
-const AS_PROTO_GEN_PATH =
-  "./node_modules/@asterai/sdk/node_modules/.bin/as-proto-gen";
+// Relative path from the CLI root directory.
+const AS_PROTO_GEN_PATH: string = "node_modules/.bin/as-proto-gen";
 
 export type CodegenFlags = {
   manifest: string;
@@ -45,10 +45,12 @@ export const codegen = (flags: CodegenFlags) => {
   } else {
     deleteOldGeneratedFiles(outDir);
   }
+  const cliRootDir = getCliRootDir();
+  const absoluteAsProtoGenPath = path.join(cliRootDir, AS_PROTO_GEN_PATH);
   try {
     execSync(
       "protoc " +
-        `--plugin=protoc-gen-as=${AS_PROTO_GEN_PATH} ` +
+        `--plugin=protoc-gen-as=${absoluteAsProtoGenPath} ` +
         `--as_out=./${flags.outputDir} ./${flags.manifest}`,
     );
   } catch (e) {
@@ -66,4 +68,9 @@ const deleteOldGeneratedFiles = (outDir: string) => {
     const deletePath = path.join(outDir, oldFile);
     fs.unlinkSync(deletePath);
   }
+};
+
+const getCliRootDir = (): string => {
+  const fullCliBinPath = path.parse(process.argv[1]).dir;
+  return path.join(fullCliBinPath, "../");
 };
