@@ -50,8 +50,8 @@ export const codegen = (flags: CodegenFlags) => {
   try {
     execSync(
       "protoc " +
-        `--plugin=protoc-gen-as=${absoluteAsProtoGenPath} ` +
-        `--as_out=./${flags.outputDir} ./${flags.manifest}`,
+        `--plugin='protoc-gen-as=${absoluteAsProtoGenPath}' ` +
+        `--as_out='./${flags.outputDir}' ./${flags.manifest}`,
     );
   } catch (e) {
     console.error("Failed to generate protobuf types:", e);
