@@ -1,6 +1,6 @@
 {
   "name": "@asterai/sdk",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "SDK for asterai",
   "main": "index.ts",
   "author": "asterai <support@asterai.io>",
@@ -16,7 +16,9 @@
     "protobuf-gen": "mkdir -p ./generated && protoc --experimental_allow_proto3_optional --plugin=protoc-gen-as=./node_modules/.bin/as-proto-gen --as_out=./generated ./protobuf/asterai.proto"
   },
   "files": [
-    "src/",
+    "index.ts",
+    "buffer.ts",
+    "global.ts",
     "protobuf/",
     "asconfig.json",
     "package.json",
