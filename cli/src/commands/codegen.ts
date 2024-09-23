@@ -49,7 +49,6 @@ export const codegen = (flags: CodegenFlags) => {
     execSync(
       "protoc " +
         `--plugin=protoc-gen-as=${AS_PROTO_GEN_PATH} ` +
-        "--as_opt=gen-helper-methods " +
         `--as_out=./${flags.outputDir} ./${flags.manifest}`,
     );
   } catch (e) {

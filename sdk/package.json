@@ -13,7 +13,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "asbuild": "asc index.ts --target sdk",
-    "protobuf-gen": "mkdir -p ./generated && protoc --experimental_allow_proto3_optional --plugin=protoc-gen-as=./node_modules/.bin/as-proto-gen --as_opt=gen-helper-methods --as_out=./generated ./protobuf/asterai.proto"
+    "protobuf-gen": "mkdir -p ./generated && protoc --experimental_allow_proto3_optional --plugin=protoc-gen-as=./node_modules/.bin/as-proto-gen --as_out=./generated ./protobuf/asterai.proto"
   },
   "files": [
     "src/",
