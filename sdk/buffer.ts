@@ -8,8 +8,8 @@ export function readBufferFromPtr(ptr: u32): Uint8Array {
 }
 
 export function writeBufferToPr(buffer: Uint8Array): u32 {
-  const ptr = heap.alloc(buffer.length + 4);
+  const ptr: usize = heap.alloc(buffer.length + 4);
   store<u32>(ptr, buffer.length);
   memory.copy(ptr + 4, buffer.dataStart, buffer.length);
-  return ptr;
+  return ptr as u32;
 }
