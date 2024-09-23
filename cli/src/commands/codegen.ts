@@ -4,8 +4,7 @@ import fs from "fs";
 import { execSync } from "node:child_process";
 
 // Relative path from the plugin root directory.
-const AS_PROTO_GEN_PATH: string =
-  "./node_modules/@asterai/sdk/node_modules/.bin/as-proto-gen";
+const AS_PROTO_GEN_PATH: string = "./node_modules/.bin/as-proto-gen";
 
 export type CodegenFlags = {
   manifest: string;
