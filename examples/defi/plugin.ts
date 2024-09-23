@@ -1,12 +1,17 @@
-import { HttpRequestBuilder } from "@asterai/sdk/http";
-import { SearchCryptoTokenArgs } from "./generated/SearchCryptoTokenArgs";
-export * from "@asterai/sdk/exports";
+import { SearchTokenInput } from "./generated/SearchTokenInput";
+import { GenericResponse } from "./generated/GenericResponse";
+import { HttpRequestBuilder, Log } from "@asterai/sdk";
 
-export function searchCryptoToken(args: SearchCryptoTokenArgs): string {
-  return new HttpRequestBuilder("api.dexscreener.com")
+export function searchCryptoToken(args: SearchTokenInput): GenericResponse {
+  Log.debug(`Received search request for ${args.query}`);
+  const response = new HttpRequestBuilder("api.dexscreener.com")
     .method("GET")
     .path("/latest/dex/search")
     .query("q", args.query)
     .build()
-    .send().content;
+    .send()
+
+  Log.debug(`Received response: ${response.response}`);
+
+  return new GenericResponse(`${response.response}`);
 }
