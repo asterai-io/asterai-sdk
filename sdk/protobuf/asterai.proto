@@ -10,13 +10,18 @@ message AppQuery {
   optional string user_id = 3;
 }
 
-message HostSemanticSearchRequest {
+message HostVectorEmbeddingSearchRequest {
   string query = 1;
   string app_collection_name = 2;
 }
 
-message HostSemanticSearchResponse {
-  string response = 1;
+message HostVectorEmbeddingSearchResponse {
+  repeated HostVectorEmbeddingSimilarityScore results = 1;
+}
+
+message HostVectorEmbeddingSimilarityScore {
+  float score = 1;
+  map<string, string> payload = 2;
 }
 
 message HostLogRequest {
