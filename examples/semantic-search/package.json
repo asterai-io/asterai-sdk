@@ -1,6 +1,6 @@
 {
   "name": "semantic-search-plugin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "author": "asterai",
   "license": "MIT",
@@ -10,9 +10,11 @@
     "build": "asterai build",
     "deploy": "asterai deploy"
   },
-  "type": "module",
   "devDependencies": {
-    "@asterai/sdk": "0.1.2"
+    "@asterai/as-proto": "latest",
+    "@asterai/as-proto-gen": "latest",
+    "@asterai/cli": "latest",
+    "@asterai/sdk": "^0.2.5"
   },
   "peerDependencies": {
     "assemblyscript": "0.27.27"
