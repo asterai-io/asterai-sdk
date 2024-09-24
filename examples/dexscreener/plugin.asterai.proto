@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "node_modules/@asterai/sdk/protobuf/asterai.proto";
+
+service Dexscreener {
+  rpc searchCryptoToken(SearchTokenInput) returns (GenericResponse);
+}
+
+message SearchTokenInput {
+  // the URL-encoded search query for fetching token prices.
+  // For example, this could be an address, a symbol, a protocol name, etc.
+  string query = 2;
+}
+
+message GenericResponse {
+  string system_message = 1;
+}

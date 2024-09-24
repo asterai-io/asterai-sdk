@@ -1,9 +1,0 @@
-name: to-hex
-functions:
-  - name: convertDecimalToHex
-    description: >-
-      converts a decimal integer to a hexadecimal string starting with 0x
-    arguments:
-      - name: integer
-        type: u64
-        description: the integer to be converted to hex

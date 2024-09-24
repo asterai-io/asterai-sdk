@@ -1,7 +1,10 @@
-import { ConvertDecimalToHexArgs } from "./generated/ConvertDecimalToHexArgs";
-export * from "@asterai/sdk/exports";
+import { ToHexRequest } from "./generated/ToHexRequest";
+import { ToHexResponse } from "./generated/ToHexResponse";
+import { Log } from "@asterai/sdk"
 
-export function convertDecimalToHex(args: ConvertDecimalToHexArgs): string {
-  const hexString = args.integer.toString(16);
-  return `0x${hexString}`;
+export function convertDecimalToHex(args: ToHexRequest): ToHexResponse {
+  Log.debug(`Converting decimal to hex: ${args.decimal}`);
+
+  const hexString = args.decimal.toString(16);
+  return new ToHexResponse(`0x${hexString}.`);
 }

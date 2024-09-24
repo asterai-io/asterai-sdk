@@ -1,6 +1,6 @@
 {
-  "name": "semantic-search-plugin",
-  "version": "1.1.0",
+  "name": "dexscreener",
+  "version": "1.0.0",
   "description": "",
   "author": "asterai",
   "license": "MIT",
@@ -10,6 +10,7 @@
     "build": "asterai build",
     "deploy": "asterai deploy"
   },
+  "type": "module",
   "devDependencies": {
     "@asterai/as-proto": "latest",
     "@asterai/as-proto-gen": "latest",

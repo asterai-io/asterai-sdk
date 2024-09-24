@@ -2,26 +2,22 @@
   "name": "to-hex",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-    "test": "node tests",
-    "asbuild:debug": "asc index.ts --target debug",
-    "asbuild:release": "asc index.ts --target release",
-    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
-    "start": "npx serve ."
-  },
-  "author": "",
+  "author": "asterai",
   "license": "MIT",
+  "scripts": {
+    "auth": "asterai auth",
+    "codegen": "asterai codegen",
+    "build": "asterai build",
+    "deploy": "asterai deploy"
+  },
+  "type": "module",
   "devDependencies": {
-    "@asterai/sdk": "0.1.2"
+    "@asterai/as-proto": "latest",
+    "@asterai/as-proto-gen": "latest",
+    "@asterai/cli": "latest",
+    "@asterai/sdk": "^0.2.5"
   },
   "peerDependencies": {
     "assemblyscript": "0.27.27"
-  },
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./build/release.js",
-      "types": "./build/release.d.ts"
-    }
   }
 }

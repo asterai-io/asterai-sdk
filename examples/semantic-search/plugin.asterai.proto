@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "node_modules/@asterai/sdk/protobuf/asterai.proto";
+
+service SemanticSearch {
+  rpc processQuery(PluginContext) returns (ProcessQueryOutput);
+}
+
+message ProcessQueryOutput {
+  string system_message = 1;
+}
