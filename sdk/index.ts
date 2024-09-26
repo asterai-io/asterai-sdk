@@ -242,7 +242,7 @@ export class UserKvStorage {
   }
 
   public setString(key: string, value: string | null): void {
-    const request = new HostKvSetUserStringRequest(this.userId, key);
+    const request = new HostKvSetUserStringRequest(this.userId, key, value);
     const requestBytes = Protobuf.encode<HostKvSetUserStringRequest>(
       request,
       HostKvSetUserStringRequest.encode,
