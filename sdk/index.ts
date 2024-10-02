@@ -107,6 +107,11 @@ export class HttpRequestBuilder {
     return this;
   }
 
+  public basicAuth(username: string, password: string): HttpRequestBuilder {
+    this._headers.set("authorization", `Basic ${base64Encode(`${username}:${password}`)}`);
+    return this;
+  }
+
   public method(value: string): HttpRequestBuilder {
     this._method = value;
     return this;
@@ -122,16 +127,17 @@ export class HttpRequestBuilder {
     return this;
   }
 
+  public setForm(form: HttpForm): HttpRequestBuilder {
+    this._body = form.renderBody();
+    return this;
+  }
+
   public version(value: string): HttpRequestBuilder {
     this._version = value;
     return this;
   }
 
   public build(): HttpRequest {
-    if (this._formData.size > 0 && this._body == "") {
-      this._body = this.renderFormData();
-    }
-    
     const queryString = this.renderQueryString();
     this.setDefaultContentLengthHeader();
     const headers = this.renderHeaders();
@@ -183,8 +189,25 @@ export class HttpRequestBuilder {
     }
     return queryString;
   }
+}
 
-  private renderFormData(): string {
+export enum HttpFormEncoding {
+  UrlEncoded
+}
+
+export class HttpForm {
+  private _formData: Map<string, string> = new Map();
+  private _encoding: HttpFormEncoding;
+
+  public constructor(encoding: HttpFormEncoding) {
+    this._encoding = encoding;
+  }
+
+  public setField(key: string, value: string): void {
+    this._formData.set(key, value);
+  }
+  
+  public renderBody(): string {
     let formData = "";
     const keys = this._formData.keys();
     const values = this._formData.values();
