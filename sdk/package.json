@@ -33,5 +33,8 @@
     "@asterai/as-proto": "1.4.1",
     "@asterai/as-proto-gen": "1.4.1",
     "assemblyscript": "0.27.27"
+  },
+  "dependencies": {
+    "as-base64": "^0.2.0"
   }
 }

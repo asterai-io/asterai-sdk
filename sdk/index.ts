@@ -9,6 +9,7 @@ import { HostHttpResponse } from "./generated/HostHttpResponse";
 import { HostKvGetUserStringRequest } from "./generated/HostKvGetUserStringRequest";
 import { HostKvGetUserStringResponse } from "./generated/HostKvGetUserStringResponse";
 import { HostKvSetUserStringRequest } from "./generated/HostKvSetUserStringRequest";
+import { decode, encode } from "as-base64";
 
 declare namespace host {
   export function log(request: u32): void;
@@ -80,6 +81,7 @@ export class HttpRequest {
 export class HttpRequestBuilder {
   private _headers: Map<string, string> = new Map();
   private _queries: Map<string, string> = new Map();
+  private _formData: Map<string, string> = new Map();
   private _method: string = "GET";
   private _path: string = "/";
   private _body: string = "";
@@ -97,6 +99,11 @@ export class HttpRequestBuilder {
 
   public query(key: string, value: string): HttpRequestBuilder {
     this._queries.set(key, encodeURIComponent(value));
+    return this;
+  }
+
+  public form(field: string, value: string): HttpRequestBuilder {
+    this._formData.set(field, value);
     return this;
   }
 
@@ -121,6 +128,10 @@ export class HttpRequestBuilder {
   }
 
   public build(): HttpRequest {
+    if (this._formData.size > 0 && this._body == "") {
+      this._body = this.renderFormData();
+    }
+    
     const queryString = this.renderQueryString();
     this.setDefaultContentLengthHeader();
     const headers = this.renderHeaders();
@@ -172,6 +183,18 @@ export class HttpRequestBuilder {
     }
     return queryString;
   }
+
+  private renderFormData(): string {
+    let formData = "";
+    const keys = this._formData.keys();
+    const values = this._formData.values();
+    for (let i = 0; i < keys.length; i++) {
+      const value = encodeURIComponent(values[i]);
+      formData += `${keys[i]}=${value}&`;
+    }
+
+    return formData;
+  }
 }
 
 export function encodeUriComponent(input: string): string {
@@ -179,7 +202,7 @@ export function encodeUriComponent(input: string): string {
 
   for (let i = 0; i < input.length; i++) {
     const c = input.charAt(i);
-    if (isSafe(c)) {
+    if (isUrlSafe(c)) {
       result += c;
     } else {
       result += "%" + c.charCodeAt(0).toString(16).toUpperCase();
@@ -189,7 +212,7 @@ export function encodeUriComponent(input: string): string {
   return result;
 }
 
-function isSafe(c: string): boolean {
+function isUrlSafe(c: string): boolean {
   return (
     (c >= "a" && c <= "z") ||
     (c >= "A" && c <= "Z") ||
@@ -249,4 +272,20 @@ export class UserKvStorage {
     );
     host.kv_set_user_string(writeBufferToPr(requestBytes));
   }
+}
+
+function stringToUint8Array(input: string): Uint8Array {
+  return Uint8Array.wrap(String.UTF8.encode(input));
+}
+
+function uint8ArrayToString(input: Uint8Array): string {
+  return String.UTF8.decode(input.buffer);
+}
+
+export function base64Encode(input: string): string {
+  return encode(stringToUint8Array(input));
+}
+
+export function base64Decode(input: string): string {
+  return uint8ArrayToString(decode(input));
 }
