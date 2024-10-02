@@ -9,7 +9,7 @@ import { HostHttpResponse } from "./generated/HostHttpResponse";
 import { HostKvGetUserStringRequest } from "./generated/HostKvGetUserStringRequest";
 import { HostKvGetUserStringResponse } from "./generated/HostKvGetUserStringResponse";
 import { HostKvSetUserStringRequest } from "./generated/HostKvSetUserStringRequest";
-import { decode, encode } from "as-base64";
+import { decode, encode } from "as-base64/assembly";
 
 declare namespace host {
   export function log(request: u32): void;
