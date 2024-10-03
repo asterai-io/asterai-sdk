@@ -60,6 +60,7 @@ export const codegen = (flags: CodegenFlags) => {
     execSync(
       "protoc " +
         `--plugin='protoc-gen-as=${absoluteAsProtoGenPath}' ` +
+        `--experimental_allow_proto3_optional ` +
         `--as_out='./${flags.outputDir}' ./${flags.manifest}`,
     );
   } catch (e) {
