@@ -81,7 +81,6 @@ export class HttpRequest {
 export class HttpRequestBuilder {
   private _headers: Map<string, string> = new Map();
   private _queries: Map<string, string> = new Map();
-  private _formData: Map<string, string> = new Map();
   private _method: string = "GET";
   private _path: string = "/";
   private _body: string = "";
@@ -99,11 +98,6 @@ export class HttpRequestBuilder {
 
   public query(key: string, value: string): HttpRequestBuilder {
     this._queries.set(key, encodeURIComponent(value));
-    return this;
-  }
-
-  public form(field: string, value: string): HttpRequestBuilder {
-    this._formData.set(field, value);
     return this;
   }
 
