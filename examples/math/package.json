@@ -12,9 +12,10 @@
     "deploy": "npx asterai deploy -a $ASTERAI_APP_ID"
   },
   "devDependencies": {
-    "@asterai/cli": "0.1.3",
-    "@asterai/sdk": "0.1.2",
-    "@asterai/as-proto": "1.4.1"
+    "@asterai/cli": "latest",
+    "@asterai/sdk": "latest",
+    "@asterai/as-proto": "latest",
+    "@asterai/as-proto-gen": "latest"
   },
   "peerDependencies": {
     "assemblyscript": "0.27.27"
