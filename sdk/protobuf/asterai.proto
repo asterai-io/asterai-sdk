@@ -1,3 +1,4 @@
+// TODO: source this from a central public repo.
 syntax = "proto3";
 
 message PluginContext {
@@ -50,4 +51,13 @@ message HostKvSetUserStringRequest {
   string user_id = 1;
   string key = 2;
   optional string value = 3;
+}
+
+message HostPluginEnvGetStringRequest {
+  string app_plugin_id = 1;
+  string key = 2;
+}
+
+message HostPluginEnvGetStringResponse {
+  string value = 1;
 }

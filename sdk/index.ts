@@ -9,6 +9,9 @@ import { HostHttpResponse } from "./generated/HostHttpResponse";
 import { HostKvGetUserStringRequest } from "./generated/HostKvGetUserStringRequest";
 import { HostKvGetUserStringResponse } from "./generated/HostKvGetUserStringResponse";
 import { HostKvSetUserStringRequest } from "./generated/HostKvSetUserStringRequest";
+import { HostPluginEnvGetStringRequest } from "./generated/HostPluginEnvGetStringRequest";
+import { HostPluginEnvGetStringResponse } from "./generated/HostPluginEnvGetStringResponse";
+import { HostPluginEnvSetStringRequest } from "./generated/HostPluginEnvSetStringRequest";
 import { decode, encode } from "as-base64/assembly";
 
 declare namespace host {
@@ -17,6 +20,8 @@ declare namespace host {
   export function vector_embedding_search(request: u32): u32;
   export function kv_get_user_string(request: u32): u32;
   export function kv_set_user_string(request: u32): void;
+  export function plugin_env_get_string(request: u32): u32;
+  export function plugin_env_set_string(request: u32): void;
 }
 
 export class Log {
@@ -288,6 +293,29 @@ export class UserKvStorage {
       HostKvSetUserStringRequest.encode,
     );
     host.kv_set_user_string(writeBufferToPr(requestBytes));
+  }
+}
+
+export class PluginEnvStorage {
+  private readonly plugin_id: string;
+
+  public constructor(plugin_id: string) {
+    this.plugin_id = plugin_id;
+  }
+
+  public getString(key: string): string {
+    const request = new HostPluginEnvGetStringRequest(this.plugin_id, key);
+    const requestBytes = Protobuf.encode<HostPluginEnvGetStringRequest>(
+      request,
+      HostPluginEnvGetStringRequest.encode,
+    );
+    const responsePtr = host.plugin_env_get_string(writeBufferToPr(requestBytes));
+    const response = Protobuf.decode<HostPluginEnvGetStringResponse>(
+      readBufferFromPtr(responsePtr),
+      HostPluginEnvGetStringResponse.decode,
+    );
+    
+    return response.value ? response.value : "";
   }
 }
 
