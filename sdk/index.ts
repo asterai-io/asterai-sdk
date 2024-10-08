@@ -315,7 +315,7 @@ export class PluginEnvStorage {
       HostPluginEnvGetStringResponse.decode,
     );
     
-    return response.value ? response.value : "";
+    return response.value || "";
   }
 }
 
