@@ -11,7 +11,6 @@ import { HostKvGetUserStringResponse } from "./generated/HostKvGetUserStringResp
 import { HostKvSetUserStringRequest } from "./generated/HostKvSetUserStringRequest";
 import { HostPluginEnvGetStringRequest } from "./generated/HostPluginEnvGetStringRequest";
 import { HostPluginEnvGetStringResponse } from "./generated/HostPluginEnvGetStringResponse";
-import { HostPluginEnvSetStringRequest } from "./generated/HostPluginEnvSetStringRequest";
 import { decode, encode } from "as-base64/assembly";
 
 declare namespace host {
@@ -303,7 +302,7 @@ export class PluginEnvStorage {
   }
 
   public getString(key: string): string {
-    const request = new HostPluginEnvGetStringRequest(this.plugin_id, key);
+    const request = new HostPluginEnvGetStringRequest(key);
     const requestBytes = Protobuf.encode<HostPluginEnvGetStringRequest>(
       request,
       HostPluginEnvGetStringRequest.encode,

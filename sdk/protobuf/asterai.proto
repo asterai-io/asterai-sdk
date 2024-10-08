@@ -54,10 +54,9 @@ message HostKvSetUserStringRequest {
 }
 
 message HostPluginEnvGetStringRequest {
-  string app_plugin_id = 1;
-  string key = 2;
+  string key = 1;
 }
 
 message HostPluginEnvGetStringResponse {
-  string value = 1;
+  optional string value = 1;
 }
