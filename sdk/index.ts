@@ -21,7 +21,6 @@ declare namespace host {
   export function kv_get_user_string(request: u32): u32;
   export function kv_set_user_string(request: u32): void;
   export function plugin_env_get_string(request: u32): u32;
-  export function plugin_env_set_string(request: u32): void;
 }
 
 export class Log {
