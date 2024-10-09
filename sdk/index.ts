@@ -294,21 +294,19 @@ export class UserKvStorage {
   }
 }
 
-export class PluginEnvStorage {
-  public getString(key: string): string | null{
-    const request = new HostPluginEnvGetStringRequest(key);
-    const requestBytes = Protobuf.encode<HostPluginEnvGetStringRequest>(
-      request,
-      HostPluginEnvGetStringRequest.encode,
-    );
-    const responsePtr = host.plugin_env_get_string(writeBufferToPr(requestBytes));
-    const response = Protobuf.decode<HostPluginEnvGetStringResponse>(
-      readBufferFromPtr(responsePtr),
-      HostPluginEnvGetStringResponse.decode,
-    );
-    
-    return response.value;
-  }
+export function getEnv(key: string): string | null {
+  const request = new HostPluginEnvGetStringRequest(key);
+  const requestBytes = Protobuf.encode<HostPluginEnvGetStringRequest>(
+    request,
+    HostPluginEnvGetStringRequest.encode,
+  );
+  const responsePtr = host.plugin_env_get_string(writeBufferToPr(requestBytes));
+  const response = Protobuf.decode<HostPluginEnvGetStringResponse>(
+    readBufferFromPtr(responsePtr),
+    HostPluginEnvGetStringResponse.decode,
+  );
+  
+  return response.value;
 }
 
 function stringToUint8Array(input: string): Uint8Array {

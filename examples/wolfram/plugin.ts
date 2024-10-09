@@ -1,12 +1,10 @@
-import { Log, PluginEnvStorage } from "@asterai/sdk";
+import { Log, getEnv } from "@asterai/sdk";
 import { TextQueryRequest } from "./generated/TextQueryRequest";
 import { TextQueryResponse } from "./generated/TextQueryResponse";
 import { HttpRequestBuilder } from "@asterai/sdk";
 
 export function textQuery(args: TextQueryRequest): TextQueryResponse {
-  const envStorage = new PluginEnvStorage();
-  const appId = envStorage.getString("APP_ID");
-
+  const appId = getEnv("APP_ID");
   if (!appId) {
     return new TextQueryResponse(`
       It looks like you haven't set your Wolfram Alpha app id. Please set it in the plugin settings as:
