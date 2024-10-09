@@ -295,13 +295,7 @@ export class UserKvStorage {
 }
 
 export class PluginEnvStorage {
-  private readonly plugin_id: string;
-
-  public constructor(plugin_id: string) {
-    this.plugin_id = plugin_id;
-  }
-
-  public getString(key: string): string {
+  public getString(key: string): string | null{
     const request = new HostPluginEnvGetStringRequest(key);
     const requestBytes = Protobuf.encode<HostPluginEnvGetStringRequest>(
       request,
@@ -313,7 +307,7 @@ export class PluginEnvStorage {
       HostPluginEnvGetStringResponse.decode,
     );
     
-    return response.value || "";
+    return response.value;
   }
 }
 
