@@ -5,7 +5,7 @@ import { HttpRequestBuilder } from "@asterai/sdk";
 
 export function textQuery(args: TextQueryRequest): TextQueryResponse {
   const envStorage = new PluginEnvStorage();
-  const appId = envStorage.getString("appId");
+  const appId = envStorage.getString("APP_ID");
 
   if (!appId) {
     return new TextQueryResponse(`
