@@ -1,7 +1,7 @@
 {
   "name": "@asterai/cli",
   "description": "CLI for building and deploying asterai plugins",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "author": "asterai <support@asterai.io>",
   "repository": "asterai-io/asterai-sdk",
   "homepage": "https://github.com/asterai-io/asterai-sdk",
@@ -58,7 +58,8 @@
     "axios": "^1.7.2",
     "form-data": "^4.0.0",
     "mustache": "^4.2.0",
-    "protobufjs": "^7.4.0"
+    "protobufjs": "^7.4.0",
+    "protobufjs-cli": "^1.1.3"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
