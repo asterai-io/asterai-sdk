@@ -57,11 +57,11 @@ export default class Codegen extends Command {
 
   async run(): Promise<void> {
     const { flags } = await this.parse(Codegen);
-    generateClientTypings(flags);
+    codegen(flags);
   }
 }
 
-export const generateClientTypings = (flags: CodegenFlags) => {
+export const codegen = (flags: CodegenFlags) => {
   const manifestPath = path.resolve(flags.manifest);
   const baseDir = path.dirname(manifestPath);
   const outDir = path.join(baseDir, flags.outputDir);
@@ -72,7 +72,7 @@ export const generateClientTypings = (flags: CodegenFlags) => {
   }
 
   if (flags.appId && flags.language) {
-    return generateTypings(
+    return generateClientTypings(
       outDir,
       flags.language,
       flags.appId,
@@ -123,7 +123,7 @@ const deleteOldGeneratedFiles = (outDir: string) => {
   }
 };
 
-const generateTypings = async (
+const generateClientTypings = async (
   outDir: string,
   language: string,
   appId: string,
