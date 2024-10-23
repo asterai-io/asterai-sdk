@@ -149,10 +149,10 @@ const generateTypings = async (
     fs.writeFileSync(tmpFilePath, aggregatedManifest);
 
     execSync(`
-      npx pbjs -t static --no-service ${tmpFilePath} -o ${path.join(outDir, "plugins.asterai.js")}
+      npx -p protobufjs-cli pbjs -t static --no-service ${tmpFilePath} -o ${path.join(outDir, "plugins.asterai.js")}
     `);
     execSync(`
-      npx pbts -o ${path.join(outDir, "plugins.asterai.d.ts")} ${path.join(outDir, "plugins.asterai.js")}
+      npx -p protobufjs-cli pbts -o ${path.join(outDir, "plugins.asterai.d.ts")} ${path.join(outDir, "plugins.asterai.js")}
     `);
 
     fs.unlinkSync(tmpFilePath);
