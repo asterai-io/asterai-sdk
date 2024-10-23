@@ -176,7 +176,7 @@ const downloadEnabledPluginsManifests = async (
   return response.data;
 };
 
-type ExportedManifestFile = {
+type ExportedManifestResponse = {
   manifests: ExportedManifest[];
 };
 
