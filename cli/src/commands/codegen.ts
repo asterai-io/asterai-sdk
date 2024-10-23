@@ -9,8 +9,7 @@ import { inspect } from "util";
 
 // Relative path from the plugin root directory.
 const AS_PROTO_GEN_PATH: string = "./node_modules/.bin/as-proto-gen";
-// const PRODUCTION_ENDPOINT_BASE_URL = "https://api.asterai.io";
-const PRODUCTION_ENDPOINT_BASE_URL = "http://localhost:3030";
+const PRODUCTION_ENDPOINT_BASE_URL = "https://api.asterai.io";
 const STAGING_ENDPOINT_BASE_URL = "https://staging.api.asterai.io";
 
 export type CodegenFlags = {
