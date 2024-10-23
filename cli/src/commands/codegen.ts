@@ -57,11 +57,11 @@ export default class Codegen extends Command {
 
   async run(): Promise<void> {
     const { flags } = await this.parse(Codegen);
-    codegen(flags);
+    generateClientTypings(flags);
   }
 }
 
-export const codegen = (flags: CodegenFlags) => {
+export const generateClientTypings = (flags: CodegenFlags) => {
   const manifestPath = path.resolve(flags.manifest);
   const baseDir = path.dirname(manifestPath);
   const outDir = path.join(baseDir, flags.outputDir);
@@ -80,6 +80,14 @@ export const codegen = (flags: CodegenFlags) => {
     );
   }
 
+  return generateAssemblyScriptPluginTypings(outDir, baseDir, manifestPath);
+};
+
+const generateAssemblyScriptPluginTypings = async (
+  outDir: string,
+  baseDir: string,
+  manifestPath: string,
+) => {
   const absoluteAsProtoGenPath = path.join(baseDir, AS_PROTO_GEN_PATH);
   try {
     execSync("protoc --version");
@@ -96,7 +104,7 @@ export const codegen = (flags: CodegenFlags) => {
       "protoc " +
         `--plugin='protoc-gen-as=${absoluteAsProtoGenPath}' ` +
         `--experimental_allow_proto3_optional ` +
-        `--as_out='./${flags.outputDir}' ./${flags.manifest}`,
+        `--as_out='./${outDir}' ./${manifestPath}`,
     );
   } catch (e) {
     console.error("Failed to generate protobuf types:", e);
@@ -121,47 +129,52 @@ const generateTypings = async (
   appId: string,
   shouldUseStaging: boolean,
 ) => {
-  const manifests = await downloadEnabledPluginsManifests(
+  const manifestsResponse = await downloadEnabledPluginsManifests(
     appId,
     shouldUseStaging,
   );
   fs.writeFileSync(
     path.join(outDir, "manifests.json"),
-    JSON.stringify(manifests, null, 2),
+    JSON.stringify(manifestsResponse, null, 2),
   );
   console.log("manifests.json generated successfully.");
 
   if (language === "ts") {
-    // Aggregating all the manifests into a single file
-    let aggregatedManifest = `
-      syntax = 'proto3';
-      \n
-    `;
-
-    // Saving it to a temporary file
-    const osTmpDir = os.tmpdir();
-    const tmpFilePath = path.join(osTmpDir, "plugins.asterai.proto");
-    for (const manifest of manifests.manifests) {
-      aggregatedManifest += `${manifest.proto}\n`;
-    }
-    fs.writeFileSync(tmpFilePath, aggregatedManifest);
+    const aggregatedManifestPath = aggregateManifests(
+      manifestsResponse.manifests,
+    );
 
     execSync(`
-      npx -p protobufjs-cli pbjs -t static --no-service ${tmpFilePath} -o ${path.join(outDir, "plugins.asterai.js")}
+      npx -p protobufjs-cli pbjs -t static --no-service ${aggregatedManifestPath} -o ${path.join(outDir, "plugins.asterai.js")}
     `);
     execSync(`
       npx -p protobufjs-cli pbts -o ${path.join(outDir, "plugins.asterai.d.ts")} ${path.join(outDir, "plugins.asterai.js")}
     `);
 
-    fs.unlinkSync(tmpFilePath);
+    fs.unlinkSync(aggregatedManifestPath);
     console.log("Typings generated successfully.");
   }
+};
+
+const aggregateManifests = (manifests: ExportedManifest[]) => {
+  let aggregatedManifest = `
+  syntax = 'proto3';
+  \n
+`;
+
+  const osTmpDir = os.tmpdir();
+  const aggregatedManifestPath = path.join(osTmpDir, "plugins.asterai.proto");
+  for (const manifest of manifests) {
+    aggregatedManifest += `${manifest.proto}\n`;
+  }
+  fs.writeFileSync(aggregatedManifestPath, aggregatedManifest);
+  return aggregatedManifestPath;
 };
 
 const downloadEnabledPluginsManifests = async (
   appId: string,
   shouldUseStaging: boolean,
-): Promise<ExportedManifestFile> => {
+): Promise<ExportedManifestResponse> => {
   const baseUrl = shouldUseStaging
     ? STAGING_ENDPOINT_BASE_URL
     : PRODUCTION_ENDPOINT_BASE_URL;
