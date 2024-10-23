@@ -5,7 +5,6 @@ import { execSync } from "node:child_process";
 import axios from "axios";
 import { getConfigValue } from "../config.js";
 import os from "os";
-import { inspect } from "util";
 
 // Relative path from the plugin root directory.
 const AS_PROTO_GEN_PATH: string = "./node_modules/.bin/as-proto-gen";
