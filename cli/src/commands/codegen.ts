@@ -141,7 +141,7 @@ const generateTypings = async (
     // Saving it to a temporary file
     const osTmpDir = os.tmpdir();
     const tmpFilePath = path.join(osTmpDir, "plugins.asterai.proto");
-    for (const manifest of manifests.protos) {
+    for (const manifest of manifests.manifests) {
       aggregatedManifest += `${manifest.proto}\n`;
     }
     fs.writeFileSync(tmpFilePath, aggregatedManifest);
@@ -177,7 +177,7 @@ const downloadEnabledPluginsManifests = async (
 };
 
 type ExportedManifestFile = {
-  protos: ExportedManifest[];
+  manifests: ExportedManifest[];
 };
 
 type ExportedManifest = {
