@@ -26,6 +26,7 @@ pub(crate) mod push;
 pub(crate) mod remove_component;
 mod run;
 pub(crate) mod set_var;
+mod well_known;
 
 pub struct EnvArgs {
     action: EnvAction,

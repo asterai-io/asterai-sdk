@@ -1,5 +1,6 @@
 use crate::auth::Auth;
 use crate::command::env::call_api::{AppState, RUNTIME_SECRET_ENV, handle_call};
+use crate::command::env::well_known;
 use crate::command::resource_or_id::ResourceOrIdArg;
 use crate::local_store::LocalStore;
 use crate::registry::{GetEnvironmentResponse, RegistryClient};
@@ -159,6 +160,14 @@ impl RunArgs {
             .route(
                 "/v1/environment/{env_ns}/{env_name}/call",
                 axum::routing::post(handle_call),
+            )
+            .route(
+                "/.well-known/oauth-protected-resource/{env_ns}/{env_name}/{comp_ns}/{comp_name}",
+                axum::routing::get(well_known::handle_protected_resource),
+            )
+            .route(
+                "/.well-known/oauth-authorization-server/{env_ns}/{env_name}/{comp_ns}/{comp_name}",
+                axum::routing::get(well_known::handle_authorization_server),
             )
             .fallback(handle_request)
             .with_state(state);
