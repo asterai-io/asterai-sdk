@@ -32,6 +32,7 @@ pub struct EnvArgs {
     env_resource_or_id: Option<ResourceOrIdArg>,
     component_arg: Option<ResourceOrIdArg>,
     component_ref: Option<ComponentRef>,
+    is_local_component: bool,
     function: Option<String>,
     function_args: Vec<String>,
     run_args: Option<RunArgs>,
@@ -90,6 +91,7 @@ impl EnvArgs {
                 env_resource_or_id: None,
                 component_arg: None,
                 component_ref: None,
+                is_local_component: false,
                 function: None,
                 function_args: vec![],
                 run_args: Some(RunArgs::parse(args, allow_dirs.clone())?),
@@ -117,6 +119,7 @@ impl EnvArgs {
                     env_resource_or_id: Some(env_resource_or_id),
                     component_arg: None,
                     component_ref: None,
+                    is_local_component: false,
                     function: None,
                     function_args: vec![],
                     run_args: None,
@@ -136,6 +139,7 @@ impl EnvArgs {
                 env_resource_or_id: Some(parse_env_name_or_id()?),
                 component_arg: None,
                 component_ref: None,
+                is_local_component: false,
                 function: None,
                 function_args: vec![],
                 run_args: None,
@@ -159,6 +163,7 @@ impl EnvArgs {
                     env_resource_or_id: Some(env),
                     component_arg: Some(comp_arg),
                     component_ref: None,
+                    is_local_component: false,
                     function: Some(function),
                     function_args: args.collect::<Vec<_>>(),
                     run_args: None,
@@ -176,14 +181,20 @@ impl EnvArgs {
             EnvAction::AddComponent => {
                 let env_resource_or_id = parse_env_name_or_id()?;
                 let component_string = args.next().ok_or_eyre(
-                    "missing component (e.g. namespace:component or namespace:component@version)",
+                    "missing component \
+                     (e.g. namespace:component, namespace:component@version, or . for local project)",
                 )?;
-                let component_ref = ComponentRef::parse(&component_string)?;
+                let is_local_component = component_string == ".";
+                let component_ref = match is_local_component {
+                    true => None,
+                    false => Some(ComponentRef::parse(&component_string)?),
+                };
                 Self {
                     action,
                     env_resource_or_id: Some(env_resource_or_id),
                     component_arg: None,
-                    component_ref: Some(component_ref),
+                    component_ref,
+                    is_local_component,
                     function: None,
                     function_args: vec![],
                     run_args: None,
@@ -201,14 +212,20 @@ impl EnvArgs {
             EnvAction::RemoveComponent => {
                 let env_resource_or_id = parse_env_name_or_id()?;
                 let component_string = args.next().ok_or_eyre(
-                    "missing component (e.g. namespace:component or namespace:component@version)",
+                    "missing component \
+                     (e.g. namespace:component, namespace:component@version, or . for local project)",
                 )?;
-                let component_ref = ComponentRef::parse(&component_string)?;
+                let is_local_component = component_string == ".";
+                let component_ref = match is_local_component {
+                    true => None,
+                    false => Some(ComponentRef::parse(&component_string)?),
+                };
                 Self {
                     action,
                     env_resource_or_id: Some(env_resource_or_id),
                     component_arg: None,
-                    component_ref: Some(component_ref),
+                    component_ref,
+                    is_local_component,
                     function: None,
                     function_args: vec![],
                     run_args: None,
@@ -228,6 +245,7 @@ impl EnvArgs {
                 env_resource_or_id: None,
                 component_arg: None,
                 component_ref: None,
+                is_local_component: false,
                 function: None,
                 function_args: vec![],
                 run_args: None,
@@ -246,6 +264,7 @@ impl EnvArgs {
                 env_resource_or_id: None,
                 component_arg: None,
                 component_ref: None,
+                is_local_component: false,
                 function: None,
                 function_args: vec![],
                 run_args: None,
@@ -264,6 +283,7 @@ impl EnvArgs {
                 env_resource_or_id: None,
                 component_arg: None,
                 component_ref: None,
+                is_local_component: false,
                 function: None,
                 function_args: vec![],
                 run_args: None,
@@ -282,6 +302,7 @@ impl EnvArgs {
                 env_resource_or_id: None,
                 component_arg: None,
                 component_ref: None,
+                is_local_component: false,
                 function: None,
                 function_args: vec![],
                 run_args: None,
@@ -300,6 +321,7 @@ impl EnvArgs {
                 env_resource_or_id: None,
                 component_arg: None,
                 component_ref: None,
+                is_local_component: false,
                 function: None,
                 function_args: vec![],
                 run_args: None,
@@ -318,6 +340,7 @@ impl EnvArgs {
                 env_resource_or_id: None,
                 component_arg: None,
                 component_ref: None,
+                is_local_component: false,
                 function: None,
                 function_args: vec![],
                 run_args: None,
@@ -426,6 +449,7 @@ impl EnvArgs {
             env_resource_or_id: None,
             component_arg: None,
             component_ref: None,
+            is_local_component: false,
             function: None,
             function_args: vec![],
             run_args: None,
@@ -452,6 +476,7 @@ impl EnvArgs {
             env_resource_or_id: Some(ResourceOrIdArg::from_str(env_name).unwrap()),
             component_arg: None,
             component_ref: None,
+            is_local_component: false,
             function: None,
             function_args: vec![],
             run_args: None,
@@ -482,6 +507,7 @@ impl EnvArgs {
             env_resource_or_id: Some(ResourceOrIdArg::from_str(env_name).unwrap()),
             component_arg: Some(ResourceOrIdArg::from_str(component).unwrap()),
             component_ref: None,
+            is_local_component: false,
             function: Some(function.to_string()),
             function_args: args,
             run_args: None,
@@ -508,6 +534,7 @@ impl EnvArgs {
             env_resource_or_id: Some(ResourceOrIdArg::from_str(env_name).unwrap()),
             component_arg: None,
             component_ref: None,
+            is_local_component: false,
             function: None,
             function_args: vec![],
             run_args: None,
@@ -535,6 +562,7 @@ impl EnvArgs {
             env_resource_or_id: Some(ResourceOrIdArg::from_str(env_name).unwrap()),
             component_arg: None,
             component_ref: Some(ComponentRef::parse(component_ref_str)?),
+            is_local_component: false,
             function: None,
             function_args: vec![],
             run_args: None,
@@ -562,6 +590,7 @@ impl EnvArgs {
             env_resource_or_id: Some(ResourceOrIdArg::from_str(env_name).unwrap()),
             component_arg: None,
             component_ref: Some(ComponentRef::parse(component_ref_str)?),
+            is_local_component: false,
             function: None,
             function_args: vec![],
             run_args: None,

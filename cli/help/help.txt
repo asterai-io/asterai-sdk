@@ -15,8 +15,8 @@ Environment commands:
   asterai env pull <name>                          Pull the environment <name> from the registry
   asterai env push <name>                          Push the local environment <name> to the registry
   asterai env inspect <name>                       Show components, env vars, and metadata
-  asterai env add-component <env> <component>      Add a component to an environment
-  asterai env remove-component <env> <component>   Remove a component from an environment
+  asterai env add-component <env> <component>      Add a component to an environment (use . for local project)
+  asterai env remove-component <env> <component>   Remove a component from an environment (use . for local project)
   asterai env set-var <name> --var NAME=VALUE      Set an env var (NAME= to clear)
   asterai env ls                                   List all environments you have write access to
   asterai env cp <source> <dest>                   Copy an environment to a new namespace:name

@@ -62,15 +62,11 @@ impl ValExt for Val {
             Val::Record(fields) => {
                 let map = fields
                     .into_iter()
-                    .filter_map(|(name, val)| {
-                        val.try_into_json_value().map(|v| (name, v))
-                    })
+                    .filter_map(|(name, val)| val.try_into_json_value().map(|v| (name, v)))
                     .collect::<serde_json::Map<String, Value>>();
                 Value::Object(map)
             }
-            Val::Flags(names) => Value::Array(
-                names.into_iter().map(Value::String).collect(),
-            ),
+            Val::Flags(names) => Value::Array(names.into_iter().map(Value::String).collect()),
             Val::Resource(_) => return None,
             Val::Future(_) => return None,
             Val::Stream(_) => return None,
