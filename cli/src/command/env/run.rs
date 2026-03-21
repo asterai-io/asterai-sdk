@@ -23,6 +23,9 @@ use std::sync::Arc;
 use tokio::sync::Mutex;
 use tower_http::cors::{AllowOrigin, CorsLayer};
 
+/// Maximum request body size for the /call endpoint (1 GB).
+const CALL_BODY_LIMIT: usize = 1024 * 1024 * 1024;
+
 #[derive(Debug)]
 pub(super) struct RunArgs {
     /// Environment reference (name, namespace:name, or namespace:name@version).
@@ -159,7 +162,8 @@ impl RunArgs {
             .route("/health", axum::routing::get(|| async { "ok" }))
             .route(
                 "/v1/environment/{env_ns}/{env_name}/call",
-                axum::routing::post(handle_call),
+                axum::routing::post(handle_call)
+                    .layer(axum::extract::DefaultBodyLimit::max(CALL_BODY_LIMIT)),
             )
             .route(
                 "/.well-known/oauth-protected-resource/{env_ns}/{env_name}/{comp_ns}/{comp_name}",
